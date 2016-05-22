@@ -4,6 +4,8 @@
  *  Created on: 20 de may. de 2016
  *      Author: noe
  */
+#ifndef EQUIPO_H_INCLUDED
+#define EQUIPO_H_INCLUDED
 
 #include <string>
 
@@ -96,4 +98,4 @@ public:
 
 
 };
-
+#endif //EQUIPO_H_INCLUDED

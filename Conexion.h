@@ -5,6 +5,9 @@
  *      Author: noe
  */
 
+#ifndef CONEXION_H_INCLUDED
+#define CONEXION_H_INCLUDED
+
 #include <string>
 
 class Conexion{
@@ -44,3 +47,4 @@ public:
 
 };
 
+#endif //CONEXION_H_INCLUDED

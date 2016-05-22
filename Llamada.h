@@ -4,7 +4,8 @@
  *  Created on: 20 de may. de 2016
  *      Author: noe
  */
-
+#ifndef LLAMADA_H_INCLUDED
+#define LLAMADA_H_INCLUDED
 
 #include "AntenaUtilizada.h"
 
@@ -36,4 +37,4 @@ public:
 
 };
 
-
+# endif //LLAMADA_H_INCLUDED
