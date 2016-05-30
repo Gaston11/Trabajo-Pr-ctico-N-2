@@ -20,6 +20,11 @@ private:
 	unsigned int cantidadEquiposConectados; // Falta metodos de manipulacion
 	unsigned int cantidadLlamadasAnuladas;
 	Lista<Equipo*>* equiposQueConectaron;
+	//unsigned int maximaCantidadLlamadas; // Es la cantidad de maxima cantidad de llamadas recibidas o realizadas
+										//	segun corresponda
+
+	//unsigned int maximaCantidadMinutos; // Es la cantidad maxima de minutos de llamadas recibidas o realizadas
+										// segun corresponda
 
 public:
 	/*
@@ -42,7 +47,7 @@ public:
 	 * post: agrega el equipo que se conecto a la antena a la lista
 	 * equiposQueConectaron
 	 */
-	//void agregarEquipoQueConecto(Equipo* equipo);
+	void agregarEquipoQueConecto(Equipo* equipo);
 
 	/*
 	 * pre: si hubo equipos que conectaron en la antena
@@ -62,6 +67,7 @@ public:
 	 */
 	void incrementarLlamadasAnuladas();
 
+
 	/*
 	 * pre: si algun equipo se deconecta de la antena, siendo la cantidad
 	 * de equipos conectados mayor a cero
@@ -75,6 +81,20 @@ public:
 	 */
 	bool hayCapacidadAntena();
 
+	/*
+	 * post: retorna la cantidad de conexiones de la antena
+	 */
+	unsigned int retornarCantidadDeConexiones();
+
+	/*
+	 * post: retorna la cantidad de equipos conectados de la antena
+	 */
+	unsigned int retornarCantidadDeEquiposConectados();
+
+	/*
+	 * post: retorna la cantidad de llamadas anuladas de la antena
+	 */
+	unsigned int retornarCantidadDeLlamadasAnuladas();
 };
 
 #endif //ANTENA_H_INCLUDED

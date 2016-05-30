@@ -9,9 +9,10 @@
 
 Antena::Antena(std::string nombreAntena, unsigned int conexiones){
 	this-> nombreAntena = nombreAntena;
-	cantidadConexiones = conexiones;
-	cantidadEquiposConectados = 0;
-	equiposQueConectaron = 0;
+	this->cantidadConexiones = conexiones;
+	this->cantidadEquiposConectados = 0;
+	this->cantidadLlamadasAnuladas = 0;
+	this->equiposQueConectaron = 0;
 }
 
 Antena::~Antena(){
@@ -24,8 +25,38 @@ std::string Antena::obtenerNombre(){
 
 void  Antena::agregarEquipoQueConecto(Equipo* equipo){
 	this->equiposQueConectaron->agregar(equipo);
+
 }
 
 Lista<Equipo*>* Antena::obtenerEquiposQueConectaron(){
 	return equiposQueConectaron;
+}
+
+void Antena::incrementarCantidadEquiposConectados(){
+	this->cantidadEquiposConectados++;
+}
+
+void Antena::incrementarLlamadasAnuladas(){
+	this->cantidadLlamadasAnuladas++;
+}
+
+void Antena::decrementarCantidadEquiposConectados(){
+	if (this->cantidadEquiposConectados > 0)
+		this->cantidadEquiposConectados --;
+}
+
+bool Antena::hayCapacidadAntena(){
+	return (this->cantidadEquiposConectados  <  this->cantidadConexiones);
+}
+
+unsigned int Antena::retornarCantidadDeConexiones(){
+	return this->cantidadConexiones;
+}
+
+unsigned int Antena::retornarCantidadDeEquiposConectados(){
+	return this->cantidadEquiposConectados;
+}
+
+unsigned int Antena::retornarCantidadDeLlamadasAnuladas(){
+	return this->cantidadLlamadasAnuladas;
 }
