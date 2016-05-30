@@ -26,9 +26,28 @@ private:
 public:
 
 	/*
-	 *
+	 * pre : recibe un equipo y un tipo
+	 * post: si el equipo es emisor tipo = "Inicio" entonces inicializa la
+	 * llamada como saliente
 	 */
-	Llamada(); //recibe un equipo y tipo de llamda
+	Llamada(Equipo* equipo, std::string tipo); //recibe un equipo y tipo de llamda
+
+	/*
+	 * pre : si reciebe solo un equipo no recibe un tipo porque es receptor
+	 * post: inicializa la llamada como entrante
+	 */
+	Llamada(Equipo* equipo);
+
+	/*
+	 * post: indica si la llamada finalizo
+	 */
+	bool estaFinalizada();
+
+	/*
+	 * pre : si la llamada fue creada
+	 * post: cambia el estado de la llamada en ocupado
+	 */
+	void cambiarOcupado();
 
 	/*
 	 * post: devuelve una lista de antenas utilidas durante la llamada

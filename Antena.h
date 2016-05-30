@@ -18,6 +18,7 @@ private:
 	std::string nombreAntena;
 	unsigned int cantidadConexiones;
 	unsigned int cantidadEquiposConectados; // Falta metodos de manipulacion
+	unsigned int cantidadLlamadasAnuladas;
 	Lista<Equipo*>* equiposQueConectaron;
 
 public:
@@ -41,13 +42,38 @@ public:
 	 * post: agrega el equipo que se conecto a la antena a la lista
 	 * equiposQueConectaron
 	 */
-	void agregarEquipoQueConecto(Equipo* equipo);
+	//void agregarEquipoQueConecto(Equipo* equipo);
 
 	/*
 	 * pre: si hubo equipos que conectaron en la antena
 	 * post: devuelve la lista de equipos que se conectaron a la antena
 	 */
 	Lista<Equipo*>* obtenerEquiposQueConectaron();
+
+	/*
+	 * post: incrementa la cantidad de equipos conectados a la antena
+	 */
+	void incrementarCantidadEquiposConectados();
+
+	/*
+	 * pre: se considera llamada anulada cuando el emisor conectado a una
+	 * antena llama al receptor pero el mismo no esta conectado a una antena
+	 * post: incrementa la cantidad de llamadas anuladas
+	 */
+	void incrementarLlamadasAnuladas();
+
+	/*
+	 * pre: si algun equipo se deconecta de la antena, siendo la cantidad
+	 * de equipos conectados mayor a cero
+	 * post : decrementa la cantidad e equipos coenctados
+	 */
+	void decrementarCantidadEquiposConectados();
+
+	/*
+	 * post: indica si la antena tiene capacidad para coenctar algun
+	 * equipo
+	 */
+	bool hayCapacidadAntena();
 
 };
 

@@ -16,7 +16,6 @@ class Equipo{
 
 private:
 	std::string numero;
-	unsigned int id;
 	Lista<Llamada*>* llamadas;
 	Conexion* ultimaConexionAntena;
 
@@ -24,15 +23,19 @@ private:
 	unsigned int llamadasSalientes;
 	unsigned int entrantesOcupado;
 	unsigned int salientesOcupado;
-	unsigned int llamadasAnuladas; //porque la antena no tiene capacidad??
-								  //entrante o saliente??
+
 
 public:
 
 	/*
-	 * post: Inicializa al equipo con numero e id
+	 * post: Inicializa al equipo con numero
 	 */
-	Equipo();
+	Equipo(std::string numero);
+
+	/*
+	 * post: devuelve el numero del equipo celular
+	 */
+	std::string obtenerNumero();
 
 	/*
 	 *
@@ -40,9 +43,31 @@ public:
 	void agregarLlamadas();
 
 	/*
-	 *
+	 * post: devuelve la lista de todas las llamadas asociada al equipo
 	 */
-	//Lista<Llamada*>* obtenerLLamadasEquipo();
+	Lista<Llamada*>* obtenerLLamadasEquipo();
+
+	/*
+	 * pre : si la lista de llamadas no esta vacia
+	 * post: devuelve la ultima llamada de equipo
+	 */
+	Llamada* obtenerUltimaLlamada();
+
+	/*
+	 * pre : el equipo ya esta conectado a una antena
+	 * post: devuelve la conexion del equipo
+	 */
+	Conexion* obtenerUltimaConexion();
+
+	/*
+	 * post: indica si el equipo esta conectado a una antena
+	 */
+	bool estaConectado();
+
+	/*
+	 * post: indica si un equipo esta ocupado en otra comunicacion
+	 */
+	bool estaOcupado();
 
 	/*
 	 * post: incrementa en 1 si el equipo realizo una llamada
@@ -90,11 +115,6 @@ public:
 	 */
 	unsigned int obtenerLlamadasEntranteOcupado();
 
-	/*
-	 * pre: ??por atributo cual se considera anulada??
-	 * post: devuelve la cantidad de llamadas anuladas del equipo
-	 */
-	unsigned int obtenerLlamadasAnuladas();
 
 
 };
