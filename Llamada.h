@@ -39,13 +39,38 @@ public:
 	Llamada(Equipo* equipo);
 
 	/*
+	 * post: devuelve el equipo con el que se comunico
+	 */
+	Equipo* obtenerCelular();
+
+	/*
+	 * post: indica si la llamada es entrante
+	 */
+	bool esLlamadaEntrante();
+
+	/*
+	 * post: indica si la llamada es realizada
+	 */
+	bool esLlamadaRealizada();
+
+	/*
+	 * post: indica si la llamada fue ocupada
+	 */
+	bool esOcupado();
+
+	/*
+	 * post: finaliza la llamda
+	 */
+	void finalizarLlamada();
+
+	/*
 	 * post: indica si la llamada finalizo
 	 */
 	bool estaFinalizada();
 
 	/*
 	 * pre : si la llamada fue creada
-	 * post: cambia el estado de la llamada en ocupado
+	 * post: cambia el estado de la llamada en ocupado y la finaliza
 	 */
 	void cambiarOcupado();
 
@@ -53,6 +78,11 @@ public:
 	 * post: devuelve una lista de antenas utilidas durante la llamada
 	 */
 	Lista<AntenaUtilizada*>* obtenerAntenasUtilizadas();
+
+	/*
+	 * post: elimina los recursos utilizados
+	 */
+	~Llamada();
 
 };
 
