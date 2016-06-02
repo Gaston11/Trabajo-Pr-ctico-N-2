@@ -109,6 +109,11 @@ class MenuAntena{
 		 *  el primero valor sea mayor al maximo actual.
 		 */
 		void compararValores(unsigned int nuevoValor, unsigned int &maximoActual, Equipo* equipoNuevo, Equipo* &equipoMaximo);
+
+		/*
+		 * Post: ordena la lista antena por llamadas anuladas de mayor a menor.
+		 */
+		void ordenarAntenaPorAnuladas();
 };
 
 #ifndef MENUANTENA_H_INCLUDED

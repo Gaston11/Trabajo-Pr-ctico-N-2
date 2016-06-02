@@ -20,6 +20,10 @@ void Conexion::conectar(){
 	conectado = true;
 }
 
+bool Conexion::estaConectado(){
+	return this->conectado;
+}
+
 void Conexion::desconectar(){
 	conectado = false;
 }

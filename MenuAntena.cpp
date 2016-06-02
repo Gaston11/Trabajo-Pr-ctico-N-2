@@ -9,6 +9,7 @@
 MenuAntena::MenuAntena(Lista<Antena*>* nuevaListaAntenas, Lista<Equipo*>* nuevaListaEquipos){
 	this->listaAntenas = nuevaListaAntenas;
 	this->listaEquipos = nuevaListaEquipos;
+	this->ordenarAntenaPorAnuladas();
 }
 
 void MenuAntena::metodoPrincipal(char opcion){
@@ -53,6 +54,26 @@ void MenuAntena::metodoPrincipal(char opcion){
 						this->equipoQueMasDioOcupadoAlLlamarlo(antenaActual);
 						}
 						break;
+			case 'j' :	{
+						std::cout<< "Cantidad maxima de celulares utilizada en la antena: ";
+						std::cout<< antenaActual->obtenerNombre() << std::endl;
+						antenaActual->retornarCantidadDeEquiposConectados();
+						}
+						break;
+			case 'l' :  {
+						std::cout<< "Cantidad de llamadas anuladas por falta de capacidad en la antena: ";
+						std::cout<< antenaActual->obtenerNombre()<<std::endl;
+						antenaActual->retornarCantidadDeLlamadasAnuladas();
+						}
+						break;
+			case 'n' :  {
+						std::cout<< "Nombre antena: " << antenaActual->obtenerNombre()<< std::endl;
+						std::cout<< "Cantidad maxima de celulares soportados: "<<
+									antenaActual->retornarCantidadDeConexiones();
+						std::cout<< "Cantidad maxima de celulares utilizados: "<<
+								antenaActual->retornarCantidadDeEquiposConectados();
+						}
+						break;
 			default: std::cout<< "opcion invalida" <<std::endl;
 		}
 	}
@@ -60,7 +81,7 @@ void MenuAntena::metodoPrincipal(char opcion){
 
 void MenuAntena::mostrarPorPantalla(Equipo* equipo, unsigned int cantidad){
 	std::cout << "Numero de equipo: ";
-	std::cout << equipo->retornarNumeroEquipo();
+	std::cout << equipo->obtenerNumero();
 	std::cout << "Cantidad: ";
 	std::cout << cantidad<< std::endl;
 	std::cout << std::endl;
@@ -91,7 +112,7 @@ unsigned int MenuAntena::contarMinutosDeLlamadaEntrante(Lista<Llamada*>* llamada
 	llamadas->iniciarCursor();
 	while(llamadas->avanzarCursor()){
 		llamadaActual = llamadas->obtenerCursor();
-		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && !llamadaActual->esLlamadaOcupada())
+		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && !llamadaActual->esOcupado())
 			minutos = minutos +  this->contarMinutosAntena(llamadaActual, nombreAntena );
 		}
 	return minutos;
@@ -136,7 +157,7 @@ unsigned int MenuAntena::contarLlamadasRealizadas(Lista<Llamada*>* llamadas, std
 	llamadas->iniciarCursor();
 	while(llamadas->avanzarCursor()){
 		llamadaActual = llamadas->obtenerCursor();
-		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && !llamadaActual->esLlamadaOcupada()
+		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && !llamadaActual->esOcupado()
 			 && this->antenaUsadaEnLlamada(llamadaActual->obtenerAntenasUtilizadas(), nombreAntena ) )
 				cantidadLlamadas++;
 	}
@@ -180,7 +201,7 @@ unsigned int MenuAntena::contarLlamadasRealizadasOcupado(Lista<Llamada*>* llamad
 	llamadas->iniciarCursor();
 	while(llamadas->avanzarCursor()){
 		llamadaActual = llamadas->obtenerCursor();
-		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && llamadaActual->esLlamadaOcupada()
+		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && llamadaActual->esOcupado()
 			 && this->antenaUsadaEnLlamada(llamadaActual->obtenerAntenasUtilizadas(), nombreAntena ) )
 				cantidadLlamadasOcupado++;
 		}
@@ -212,7 +233,7 @@ unsigned int MenuAntena::contarLlamadasEntrantes(Lista<Llamada*>* llamadas, std:
 	llamadas->iniciarCursor();
 	while(llamadas->avanzarCursor()){
 		llamadaActual = llamadas->obtenerCursor();
-		if ( llamadaActual->esLlamadaRealizada() && llamadaActual->esLlamadaEntrante() && !llamadaActual->esLlamadaOcupada()
+		if ( llamadaActual->esLlamadaRealizada() && llamadaActual->esLlamadaEntrante() && !llamadaActual->esOcupado()
 					&&  this-> antenaUsadaEnLlamada(llamadaActual->obtenerAntenasUtilizadas(), nombreAntena))
 			cantidadLlamadas++;
 		}
@@ -244,7 +265,7 @@ unsigned int MenuAntena::contarMinutosDeLlamadasRecibidas(Lista<Llamada*>* llama
 	llamadas->iniciarCursor();
 	while(llamadas->avanzarCursor()){
 		llamadaActual = llamadas->obtenerCursor();
-		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && !llamadaActual->esLlamadaOcupada())
+		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && !llamadaActual->esOcupado())
 			minutos = minutos +  this->contarMinutosAntena(llamadaActual, nombreAntena);
 		}
 		return minutos;
@@ -274,7 +295,7 @@ unsigned int MenuAntena::contarLlamadasRecibidasOcupado(Lista<Llamada*>* llamada
 	llamadas->iniciarCursor();
 	while(llamadas->avanzarCursor()){
 		llamadaActual = llamadas->obtenerCursor();
-		if (llamadaActual->esLlamadaRealizada() && llamadaActual->esLlamadaEntrante() && llamadaActual->esLlamadaOcupada()
+		if (llamadaActual->esLlamadaRealizada() && llamadaActual->esLlamadaEntrante() && llamadaActual->esOcupado()
 			 && this->antenaUsadaEnLlamada(llamadaActual->obtenerAntenasUtilizadas(), nombreAntena ) )
 				cantidadLlamadasOcupado++;
 		}
@@ -289,4 +310,17 @@ void MenuAntena::compararValores(unsigned int nuevoValor,unsigned int &maximoAct
 	}
 }
 
-
+void MenuAntena::ordenarAntenaPorAnuladas(){
+	//metodo burbujeo
+	Antena* antena1, * antena2;
+	for(int contador1 =1; contador1 <= this->listaAntenas->contarElementos() - 1 ; contador1++){
+		for (int contador2 =1; contador2 <= this->listaAntenas->contarElementos() - contador1 ; contador2++){
+			antena1 = listaAntenas->obtener(contador2);
+			antena2 = listaAntenas->obtener(contador2 + 1);
+			if (antena1->retornarCantidadDeLlamadasAnuladas() < antena2->retornarCantidadDeLlamadasAnuladas()){
+				listaAntenas->asignar(antena1,contador2 + 1);
+				listaAntenas->asignar(antena2, contador2);
+			}
+		}
+	}
+}

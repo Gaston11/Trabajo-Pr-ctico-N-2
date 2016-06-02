@@ -30,6 +30,11 @@ public:
 	Conexion(std::string nombre);
 
 	/*
+	 * post: retorna si esta conectado ala antena
+	 */
+	bool estaConectado();
+
+	/*
 	 * post: conecta la antena
 	 */
 	void conectar();
