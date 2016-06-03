@@ -1,21 +1,29 @@
 /*
  * Nodo.h
  *
- *  Created on: 22/05/2016
- *      Author: gaston
+ *  Created on: 20 de may. de 2016
+ *      Author: noe
  */
-#ifndef NODO_H_INCLUDED
-#define NODO_H_INCLUDED
 
-template < typename Dato>
 
-template<class T>
-class Nodo {
+
+#ifndef NODO_H_
+#define NODO_H_
+
+#ifndef NULL
+#define NULL 0
+#endif
+
+template<class T> class Nodo {
+
     private:
+
         T dato;
+
         Nodo<T>* siguiente;
 
     public:
+
         /*
          * post: el Nodo resulta inicializado con el dato dado
          *       y sin un Nodo siguiente.
@@ -23,7 +31,7 @@ class Nodo {
         Nodo(T dato) {
 
             this->dato = dato;
-            this->siguiente = 0;
+            this->siguiente = NULL;
         }
 
         /*
@@ -59,8 +67,7 @@ class Nodo {
         }
 };
 
-#endif // NODO_H_INCLUDED
 
 
-
+#endif /* NODO_H_ */
 

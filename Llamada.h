@@ -12,15 +12,15 @@
 #include "AntenaUtilizada.h"
 #include "Lista.h"
 
-class Equipo;
 
+class Equipo;
 class Llamada{
 #include "Equipo.h"
 
 private:
 
 
-	Equipo* celular;
+	std::string celular;
 
 	Lista<AntenaUtilizada*>* antenasUtilizadas;
 
@@ -31,18 +31,19 @@ private:
 
 public:
 
+
 	/*
 	 * pre : recibe un equipo y un tipo
 	 * post: si el equipo es emisor tipo = "Inicio" entonces inicializa la
 	 * llamada como saliente
 	 */
-	Llamada(Equipo* equipo, std::string tipo); //recibe un equipo y tipo de llamda
+	Llamada(std::string equipo, std::string tipo);
 
 	/*
 	 * pre : si reciebe solo un equipo no recibe un tipo porque es receptor
 	 * post: inicializa la llamada como entrante
 	 */
-	Llamada(Equipo* equipo);
+	Llamada(std::string equipo);
 
 	/*
 	 * post: devuelve el equipo con el que se comunico

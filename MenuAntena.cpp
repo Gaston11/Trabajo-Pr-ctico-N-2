@@ -81,7 +81,7 @@ void MenuAntena::opcionesAntena(char opcion){
 			case 'g' :	{
 						std::cout<< "Cantidad maxima de celulares utilizada en la antena: ";
 						std::cout<< antenaActual->obtenerNombre() << std::endl;
-						antenaActual->retornarCantidadDeEquiposConectados();
+						antenaActual->retornarCantidadDeEquiposConectados();;
 						}
 						break;
 			case 'h' :  {
@@ -339,8 +339,8 @@ void MenuAntena::compararValores(unsigned int nuevoValor,unsigned int &maximoAct
 void MenuAntena::ordenarAntenaPorAnuladas(){
 	//metodo burbujeo
 	Antena* antena1, * antena2;
-	for(int contador1 =1; contador1 <= this->listaAntenas->contarElementos() - 1 ; contador1++){
-		for (int contador2 =1; contador2 <= this->listaAntenas->contarElementos() - contador1 ; contador2++){
+	for(unsigned int contador1 =1; contador1 <= this->listaAntenas->contarElementos() - 1 ; contador1++){
+		for (unsigned int contador2 =1; contador2 <= this->listaAntenas->contarElementos() - contador1 ; contador2++){
 			antena1 = listaAntenas->obtener(contador2);
 			antena2 = listaAntenas->obtener(contador2 + 1);
 			if (antena1->retornarCantidadDeLlamadasAnuladas() < antena2->retornarCantidadDeLlamadasAnuladas()){

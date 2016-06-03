@@ -12,6 +12,10 @@ AntenaUtilizada::AntenaUtilizada(std::string nombreAntena, unsigned int minuto){
 	minutoFinalizado = 0;
 }
 
+std::string AntenaUtilizada::obtenerNombreAntena(){
+	return this->nombreAntena;
+}
+
 void AntenaUtilizada::finAntenaUtilizada(unsigned int minutoFinal){
 	minutoFinalizado = minutoFinal;
 }
@@ -19,8 +23,8 @@ void AntenaUtilizada::finAntenaUtilizada(unsigned int minutoFinal){
 unsigned int AntenaUtilizada::duracionDeMinutosEnAntena(){
 	if ( minutoFinalizado > minutoIniciado )
 		return (minutoFinalizado - minutoIniciado);
-		else
-			return 0;
+	else
+		return 0;
 }
 
 

@@ -23,11 +23,6 @@ std::string Antena::obtenerNombre(){
 	return this->nombreAntena;
 }
 
-void  Antena::agregarEquipoQueConecto(Equipo* equipo){
-	this->equiposQueConectaron->agregar(equipo);
-
-}
-
 Lista<Equipo*>* Antena::obtenerEquiposQueConectaron(){
 	return equiposQueConectaron;
 }

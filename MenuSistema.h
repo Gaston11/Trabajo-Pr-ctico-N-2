@@ -9,6 +9,7 @@
 #define MENUSISTEMA_H_INCLUDED
 
 #include "Equipo.h"
+#include <iostream>
 
 class MenuSistema {
 

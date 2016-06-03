@@ -6,31 +6,20 @@
  */
 
 #include "Equipo.h"
-#include <string>;
 
 Equipo::Equipo(std::string numero){
 	this->numero = numero;
-	this->id = 0;
 	this->llamadas = 0;
 	this->ultimaConexionAntena = 0;   // falta metodo obtener ultima conexion
 	this->llamadasEntrantes = 0;
 	this->llamadasSalientes = 0;
 	this->entrantesOcupado = 0;
 	this->salientesOcupado = 0;
-	this->llamadasAnuladas = 0; //porque la antena no tiene capacidad??
 }
 
-
-void Equipo::cargarId(unsigned int idNuevo){
-	this->id = idNuevo;
-}
 
 std::string Equipo::obtenerNumero(){
 	return this->numero;
-}
-
-void Equipo::agregarLlamadas(){
-	// preguntar
 }
 
 Lista<Llamada*>* Equipo::obtenerLLamadasEquipo(){
@@ -38,7 +27,14 @@ Lista<Llamada*>* Equipo::obtenerLLamadasEquipo(){
 }
 
 Llamada* Equipo::obtenerUltimaLlamada(){
-	return this->llamadas->obtener(llamadas->contarElementos()); // el ultimo esta en la ultima posicion
+	this->llamadas->iniciarCursor(); // el ultimo esta en la ultima posicion
+	bool encontrado=false;
+	Llamada* llamada;
+	while(this->llamadas->avanzarCursor() && !encontrado){
+		llamada=this->llamadas->obtenerCursor();
+		encontrado=(!llamada->estaFinalizada());
+	}
+	return llamada;
 
 }
 
@@ -51,7 +47,7 @@ bool Equipo::estaConectado(){
 }
 
 bool Equipo::estaOcupado(){
-	return this->llamadas->obtener(llamadas->contarElementos())->cambiarOcupado();
+	return (!this->obtenerUltimaLlamada()->estaFinalizada());
 }
 
 void Equipo::incrementarLlamadasSalientes(){
@@ -70,10 +66,6 @@ void Equipo::incrementarEntrantesOcupado(){
 	this->entrantesOcupado++;
 }
 
-void Equipo::incrementarLlamadasAnuladas(){
-	this->llamadasAnuladas++;
-}
-
 unsigned int Equipo::obtenerLlamadasEntrantes(){
 	return this->llamadasEntrantes;
 }
@@ -90,6 +82,3 @@ unsigned int Equipo::obtenerLlamadasEntranteOcupado(){
 	return this->entrantesOcupado;
 }
 
-unsigned int Equipo::obtenerLlamadasAnuladas(){
-	return this->llamadasAnuladas;
-}

@@ -41,11 +41,6 @@ public:
 	std::string obtenerNumero();
 
 	/*
-	 *
-	 */
-	void agregarLlamadas();
-
-	/*
 	 * post: devuelve la lista de todas las llamadas asociada al equipo
 	 */
 	Lista<Llamada*>* obtenerLLamadasEquipo();

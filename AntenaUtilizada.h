@@ -24,6 +24,11 @@ public:
 	AntenaUtilizada(std::string nombre, unsigned int minuto);
 
 	/*
+	 * post: devuelve el nombre de la antena
+	 */
+	std::string obtenerNombreAntena();
+
+	/*
 	 * pre: cuando finaliza la conexion en esta antena
 	 * post: guarda el minuto en que se finalizo
 	 */

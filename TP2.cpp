@@ -8,8 +8,9 @@
 #include <iostream>
 #include <fstream>
 
-#include "ParsearLinea.h"
+#include "ParsearLineas.h"
 #include "MenuAntena.h"
+#include "MenuSistema.h"
 
 using namespace std;
 
@@ -35,9 +36,10 @@ int main(){
 	//procesar archivo
 	ParsearLineas archivo(nombreArchivo);
 
-	Lista<Equipo*>* equipos = archivo.obtenerEquipos;
+	Lista<Equipo*>* equipos = archivo.obtenerEquipos();
 	Lista<Antena*>* antenas = archivo.obtenerAntenas();
 	MenuAntena menuAntena(antenas,equipos); // AGREGADOO
+	MenuSistema menuEquipos(equipos);
 
 	char opcion;
 
@@ -51,6 +53,7 @@ int main(){
 
 		case '1':
 			//MENU DE LOS EQUIPOS
+			menuEquipos.Menu();
 			break;
 		case '2':
 			//MENU DE LAS ANTENAS

@@ -44,16 +44,18 @@ public:
 
 private:
 
+
 	/*
 	 * pre: recibe un string o linea que proviene del archivo de texto
 	 * post: obtiene el primer dato de la linea, lo elimina de la misma y luego
 	 * lo devuelve
 	 */
-	std::string ParsearLineas::obtenerDato(std::string & linea);
+	std::string obtenerDato(std::string & linea);
 
 	/*
-	 * pre : una vez inicializado ParsearLinea
-	 * post: procesa lo que contiene el archivo linea por linea
+	 * pre: recibe un string o linea que proviene del archivo de texto
+	 * post: obtiene el primer dato de la linea, lo elimina de la misma y luego
+	 * lo devuelve
 	 */
 	void procesarLineas();
 
@@ -144,6 +146,18 @@ private:
 	 * post: finaliza la ultima antena utilizada de una comunicacion
 	 */
 	void finalizarAntenaUtilizada(Equipo* emisor, unsigned int minuto);
+
+	/*
+	 *
+	 */
+	unsigned int convertir_entero(std::string cadena);
+
+	/*
+	 *
+	 */
+	unsigned int longitud(std::string cadena);
+
+
 
 };
 

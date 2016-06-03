@@ -36,51 +36,51 @@ void MenuSistema::opciones(char opcion){
 
 	switch (opcion){
 
-	case "a":
+	case 'a':
 		this->detalleEntreEquipos();
 		break;
 
-	case "b":
+	case 'b':
 		this->equipoQueMasHablo();
 		break;
 
-	case "c":
+	case 'c':
 		this->celularQueMasLlamo();
 		break;
 
-	case "d":
+	case 'd':
 		this->equipoQueMasDioOcupado();
 		break;
 
-	case "e":
+	case 'e':
 		this->equipoQueMasLlamaron();
 		break;
 
-	case "f":
+	case 'f':
 		this->equipoAlQueMasHablaron();
 		break;
 
-	case "g":
+	case 'g':
 		this->equipoMasOcupado();
 		break;
 
-	case "h":
+	case 'h':
 		this->detalleDeLlamadasEmitidas();
 		break;
 
-	case "i":
+	case 'i':
 		this->detalleDeLlamadasRecibidas();
 		break;
 
-	case "j":
+	case 'j':
 		this->detalleRecibidasYRealizadas();
 		break;
 
-	case "k":
+	case 'k':
 		this->detalleDeEquipos();
 		break;
 
-	case "l":
+	case 'l':
 		break;
 
 	default:
@@ -98,10 +98,10 @@ void MenuSistema::Menu(){
 	this->opcionesDeMenuSistema();
 	std::cin >> opcion;
 
-	while(opcion != "l"){
+	while(opcion != 'l'){
 		this->opciones(opcion);
 
-		if (opcion != "l"){
+		if (opcion != 'l'){
 			this->opcionesDeMenuSistema();
 			std::cin >> opcion;
 		}
@@ -303,7 +303,10 @@ void MenuSistema::detalleDeEquipos(){
 	while(this->equipos->avanzarCursor()){
 		i++;
 		equipo=this->equipos->obtenerCursor();
-		std::cout << i,"- ", equipo->obtenerNumero(), " - ";
+		std::cout << i;
+		std::cout << "- ";
+		std::cout<<equipo->obtenerNumero();
+		std::cout<< " - ";
 		std::cout << equipo->obtenerUltimaConexion()->obtenerNombreAntena() << std::endl;
 	}
 	//esperar al ingreso de una tecla?
@@ -325,7 +328,7 @@ unsigned int MenuSistema::detalleDeLlamadasRecibidas(){
 	while(llamadas->avanzarCursor()){
 		llamada = llamadas->obtenerCursor();
 		if (llamada->esLlamadaEntrante() && !llamada->esOcupado()){
-				std::cout << llamada->obtenerCelular()->obtenerNumero() << std::endl;
+				std::cout << llamada->obtenerCelular() << std::endl;
 				std::cout << "Antenas Utilizadas: " << std::endl;
 				this->mostrarAntenasUtilizadas(llamada);
 		}
@@ -351,7 +354,7 @@ unsigned int MenuSistema::detalleDeLlamadasEmitidas(){
 	while(llamadas->avanzarCursor()){
 		llamada = llamadas->obtenerCursor();
 		if (llamada->esLlamadaRealizada() && !llamada->esOcupado()){
-			std::cout << llamada->obtenerCelular()->obtenerNumero() << std::endl;
+			std::cout << llamada->obtenerCelular() << std::endl;
 			std::cout << "Antenas Utilizadas: " << std::endl;
 			this->mostrarAntenasUtilizadas(llamada);
 		}

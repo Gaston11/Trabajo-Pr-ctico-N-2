@@ -30,11 +30,6 @@ public:
 	Conexion(std::string nombre);
 
 	/*
-	 * post: retorna si esta conectado ala antena
-	 */
-	bool estaConectado();
-
-	/*
 	 * post: conecta la antena
 	 */
 	void conectar();
@@ -45,9 +40,20 @@ public:
 	void desconectar();
 
 	/*
+	 * post: indica si la conexion esta conectada a una antena
+	 */
+	bool estaConectado();
+
+	/*
 	 * post: devuelve el nombre de la antena
 	 */
 	std::string obtenerNombreAntena();
+
+	/*
+	 * post: cambia el nombre de la antena a la que esta conectada
+	 * y se conecta
+	 */
+	void cambiarNombreAntena(std::string nombre);
 
 
 };

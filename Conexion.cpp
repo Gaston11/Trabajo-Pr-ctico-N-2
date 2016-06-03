@@ -20,14 +20,20 @@ void Conexion::conectar(){
 	conectado = true;
 }
 
-bool Conexion::estaConectado(){
-	return this->conectado;
-}
-
 void Conexion::desconectar(){
 	conectado = false;
+}
+
+bool Conexion::estaConectado(){
+	return (this->conectado);
 }
 
 std::string Conexion::obtenerNombreAntena(){
 	return this->nombreAntena;
 }
+
+void Conexion::cambiarNombreAntena(std::string nombre){
+	this->nombreAntena = nombre;
+}
+
+

@@ -4,10 +4,10 @@
  *  Created on: 20 de may. de 2016
  *      Author: noe
  */
+
 #ifndef ANTENA_H_INCLUDED
 #define ANTENA_H_INCLUDED
 
-#include "Lista.h"
 #include <string>
 
 #include "Equipo.h"
@@ -20,11 +20,6 @@ private:
 	unsigned int cantidadEquiposConectados; // Falta metodos de manipulacion
 	unsigned int cantidadLlamadasAnuladas;
 	Lista<Equipo*>* equiposQueConectaron;
-	//unsigned int maximaCantidadLlamadas; // Es la cantidad de maxima cantidad de llamadas recibidas o realizadas
-										//	segun corresponda
-
-	//unsigned int maximaCantidadMinutos; // Es la cantidad maxima de minutos de llamadas recibidas o realizadas
-										// segun corresponda
 
 public:
 	/*
@@ -44,12 +39,6 @@ public:
 	std::string obtenerNombre();
 
 	/*
-	 * post: agrega el equipo que se conecto a la antena a la lista
-	 * equiposQueConectaron
-	 */
-	void agregarEquipoQueConecto(Equipo* equipo);
-
-	/*
 	 * pre: si hubo equipos que conectaron en la antena
 	 * post: devuelve la lista de equipos que se conectaron a la antena
 	 */
@@ -66,7 +55,6 @@ public:
 	 * post: incrementa la cantidad de llamadas anuladas
 	 */
 	void incrementarLlamadasAnuladas();
-
 
 	/*
 	 * pre: si algun equipo se deconecta de la antena, siendo la cantidad
@@ -95,6 +83,7 @@ public:
 	 * post: retorna la cantidad de llamadas anuladas de la antena
 	 */
 	unsigned int retornarCantidadDeLlamadasAnuladas();
+
 };
 
 #endif //ANTENA_H_INCLUDED

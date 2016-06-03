@@ -7,7 +7,9 @@
 #ifndef MENUANTENA_H_INCLUDED
 #define MENUANTENA_H_INCLUDED
 
-#include "Lista.h"
+#include "Antena.h"
+#include "Equipo.h"
+#include <iostream>
 
 class MenuAntena{
 	private:
@@ -121,4 +123,4 @@ class MenuAntena{
 		void ordenarAntenaPorAnuladas();
 };
 
-#ifndef MENUANTENA_H_INCLUDED
+#endif //MENUANTENA_H_INCLUDED
