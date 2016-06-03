@@ -9,7 +9,7 @@
 MenuAntena::MenuAntena(Lista<Antena*>* nuevaListaAntenas, Lista<Equipo*>* nuevaListaEquipos){
 	this->listaAntenas = nuevaListaAntenas;
 	this->listaEquipos = nuevaListaEquipos;
-	this->ordenarAntenaPorAnuladas();
+	//this->ordenarAntenaPorAnuladas(); //ESTO NO FUNCIONA POR ENDE LA OPCION H TAMPOCO
 }
 
 void MenuAntena::MenuPrincipal(){
