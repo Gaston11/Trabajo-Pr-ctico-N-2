@@ -4,18 +4,24 @@
  *  Created on: 20 de may. de 2016
  *      Author: noe
  */
+
+
 #ifndef LLAMADA_H_INCLUDED
 #define LLAMADA_H_INCLUDED
 
 #include "AntenaUtilizada.h"
+#include "Lista.h"
+
+class Equipo;
 
 class Llamada{
-
 #include "Equipo.h"
 
 private:
 
+
 	Equipo* celular;
+
 	Lista<AntenaUtilizada*>* antenasUtilizadas;
 
 	bool llamadaRealizada;
@@ -41,7 +47,7 @@ public:
 	/*
 	 * post: devuelve el equipo con el que se comunico
 	 */
-	Equipo* obtenerCelular();
+	std::string obtenerCelular();
 
 	/*
 	 * post: indica si la llamada es entrante
@@ -86,4 +92,7 @@ public:
 
 };
 
+
 # endif //LLAMADA_H_INCLUDED
+
+

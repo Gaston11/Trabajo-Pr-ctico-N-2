@@ -5,6 +5,9 @@
  *      Author: noe
  */
 
+#include "Llamada.h"
+#include "Equipo.h"
+
 Llamada::Llamada(Equipo* equipo, std::string tipo){
 	this->antenasUtilizadas = 0;
 	this->celular = equipo;
@@ -25,8 +28,8 @@ Llamada::Llamada(Equipo* equipo){
 	this->ocupado = false;
 }
 
-Equipo* Llamada::obtenerCelular(){
-	return this->celular;
+std::string Llamada::obtenerCelular(){
+	return this->celular->obtenerNumero();
 }
 
 bool Llamada::esLlamadaEntrante(){
