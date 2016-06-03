@@ -25,25 +25,6 @@ void opcionesDeMenu(){
 
 }
 
-void opcionesDeMenuAntenas(){
-
-	std::cout << "Opciones de menu sobre antenas: " << std::cout;
-
-	std::cout << "a- Celular que mas hablo de cada antena." << std::cout;
-	std::cout << "b- Celular que mas llamo de cada antena." << std::cout;
-	std::cout << "c- Celular que mas le dio ocupado de cada antena." << std::cout;
-	std::cout << "d- Celular al que mas llamaron de cada antena." << std::cout;
-	std::cout << "e- Celular al que mas le hablaron de cada antena." << std::cout;
-	std::cout << "f- Celular que mas dio ocupado de cada antena." << std::cout;
-	std::cout << "g- Cantidad maxima utilizada de Celulares por antena." << std::cout;
-	std::cout << "h- Cantidad de llamadas anuladas por falta de Capacidad";
-	std::cout << " por Antena (ordenado por cantidad descendiente)"<< std::cout;
-	std::cout << "i- Detalles de Antenas." << std::cout;
-
-	std::cout << "j- Salir." << std::cout;
-
-}
-
 int main(){
 
 	string nombreArchivo;
@@ -73,9 +54,8 @@ int main(){
 			break;
 		case '2':
 			//MENU DE LAS ANTENAS
-			opcionesDeMenuAntenas();
-			cin >> opcion;
-			menuAntena.MenuPrincipal(opcion);   ///AGREGADO
+
+			menuAntena.MenuPrincipal();   ///AGREGADO
 
 			break;
 		case '3':

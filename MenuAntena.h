@@ -22,9 +22,14 @@ class MenuAntena{
 		MenuAntena(Lista<Antena*>* nuevaListaAntenas, Lista<Equipo*>* nuevaListaEquipos);
 
 		/*
-		 * Post: recorre la lista antena y realiza el metodo que corresponda del menu
+		 * Post: realiza el metodo que corresponda del menu
 		 */
-		void metodoPrincipal(char opcion);
+		void MenuPrincipal();
+
+		/*
+		 * post: recorre la lista antena y realiza el metodo segun corresponda la opcion
+		 */
+		void opcionesAntena(char opcion);
 
 		/*
 		 * Post: muestra por pantalla el numero del equipo y la cantidad indicada ( minutos o llamadas)
