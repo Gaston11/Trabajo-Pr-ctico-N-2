@@ -16,34 +16,41 @@ class Equipo{
 
 private:
 	std::string numero;
+	unsigned int id;
 	Lista<Llamada*>* llamadas;
-	Conexion* ultimaConexionAntena;
+	Conexion* ultimaConexionAntena;   // falta metodo obtener ultima conexion
 
 	unsigned int llamadasEntrantes;
 	unsigned int llamadasSalientes;
 	unsigned int entrantesOcupado;
 	unsigned int salientesOcupado;
-
+	unsigned int llamadasAnuladas; //porque la antena no tiene capacidad??
+								  //entrante o saliente??
 
 public:
 
 	/*
-	 * post: Inicializa al equipo con numero
+	 * post: Inicializa al equipo con todos los atributos igualados a cero
 	 */
 	Equipo(std::string numero);
 
 	/*
-	 * post: devuelve el numero del equipo celular
+	 * post: agreaga el id al equipo
+	 */
+	void cargarId(unsigned int idNuevo);
+
+	/*
+	 *post: retorna numero de equipo
 	 */
 	std::string obtenerNumero();
 
 	/*
-	 *
+	 *Post: agrega una llamada a la lista llamadas
 	 */
 	void agregarLlamadas();
 
 	/*
-	 * post: devuelve la lista de todas las llamadas asociada al equipo
+	 *post: retorna un puntero a la lista llamadas equipo
 	 */
 	Lista<Llamada*>* obtenerLLamadasEquipo();
 
@@ -115,6 +122,11 @@ public:
 	 */
 	unsigned int obtenerLlamadasEntranteOcupado();
 
+	/*
+	 * pre: ??por atributo cual se considera anulada??
+	 * post: devuelve la cantidad de llamadas anuladas del equipo
+	 */
+	unsigned int obtenerLlamadasAnuladas();
 
 
 };
