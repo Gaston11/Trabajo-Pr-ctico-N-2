@@ -6,6 +6,10 @@
  */
 
 #include <iostream>
+#include <fstream>
+
+#include "ParsearLineas.h"
+#include "MenuAntena.h"
 
 using namespace std;
 
@@ -18,26 +22,6 @@ void opcionesDeMenu(){
 	std::cout << "1- Sistema (informacion sobre todos los celulares)" << std::endl;
 	std::cout << "2- Antena (informacion de cada antena)" << std::endl;
 	std::cout << "3- Salir. " <<std::endl;
-
-}
-
-void opcionesDeMenuSistema(){
-
-	std::cout << "Opciones de menu sobre equipos: " << std::endl;
-
-	std::cout << "a- Detalle de llamadas entre celular X al celular Y." << std::endl;
-	std::cout << "b- Celular que mas hablo." << std::endl;
-	std::cout << "c- Celular que mas llamo." << std::endl;
-	std::cout << "d- Celular que mas le dio ocupado." << std::endl;
-	std::cout << "e- Celular al que mas llamaron." << std::endl;
-	std::cout << "f- Celular al que mas le hablaron." << std::endl;
-	std::cout << "g- Celular que mas dio ocupado." << std::endl;
-	std::cout << "h- Detalle de llamadas emitidas por celular X." << std::endl;
-	std::cout << "i- Detalle de llamadas recibidas por el celular Y." << std::endl;
-	std::cout << "j- Detalle de llamdas recibidas por el celular X y ";
-	std::cout << "realizadas por el celular Y. " << std::endl;
-	std::cout << "k- Detalle de Celulares. " << std::endl;
-	std::cout << "l- Salir." << std::endl;
 
 }
 
@@ -68,25 +52,36 @@ int main(){
 	cin >> nombreArchivo;
 
 	//procesar archivo
+	ParsearLineas archivo(nombreArchivo);
+
+	Lista<Equipo*>* equipos = archivo.obtenerEquipos;
+	Lista<Antena*>* antenas = archivo.obtenerAntenas();
 
 	char opcion;
 
 	// mostrar menu
+	opcionesDeMenu();
 	cin >> opcion;
 
-	while (opcion != 'e'){
+	while (opcion != '3'){
 
 		switch (opcion){
 
-		case 'a':
+		case '1':
+			//MENU DE LOS EQUIPOS
 			break;
-		case 'b':
+		case '2':
+			//MENU DE LAS ANTENAS
+			opcionesDeMenuAntenas();
+			cin >> opcion;
+			MenuAntena(opcion);
+
 			break;
-		case 'c':
-			break;
-		case 'e':
+		case '3':
 			break;
 		default:
+			cout<<"Opcion invalida. Ingreselo nuevamente: ";
+			cin >>opcion;
 			break;
 
 		}
@@ -95,6 +90,4 @@ int main(){
 
 	return 0;
 }
-
-
 
