@@ -40,6 +40,10 @@ public:
 	 */
 	unsigned int duracionDeMinutosEnAntena();
 
+	/*
+	 * post: elimina los recursos compartidos
+	 */
+	~AntenaUtilizada();
 };
 
 #endif //ANTENAUTILIZADA_H_INCLUDED

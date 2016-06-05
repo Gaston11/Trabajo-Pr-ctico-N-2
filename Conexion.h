@@ -55,6 +55,11 @@ public:
 	 */
 	void cambiarNombreAntena(std::string nombre);
 
+	/*
+	 * post: elimina los recursos compartidos
+	 */
+	~Conexion();
+
 
 };
 

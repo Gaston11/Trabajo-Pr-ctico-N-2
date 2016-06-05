@@ -27,6 +27,8 @@ unsigned int AntenaUtilizada::duracionDeMinutosEnAntena(){
 		return 0;
 }
 
+AntenaUtilizada::~AntenaUtilizada(){
 
+}
 
 

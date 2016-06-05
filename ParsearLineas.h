@@ -27,6 +27,13 @@ public:
 	ParsearLineas(std::string nombreArchivo);
 
 	/*
+	 * pre: recibe un string o linea que proviene del archivo de texto
+	 * post: obtiene el primer dato de la linea, lo elimina de la misma y luego
+	 * lo devuelve
+	 */
+	void procesarLineas();
+
+	/*
 	 * pre : una vez procesado el archivo
 	 * post: devuelve un puntero a una lista de antenas
 	 */
@@ -51,13 +58,6 @@ private:
 	 * lo devuelve
 	 */
 	std::string obtenerDato(std::string & linea);
-
-	/*
-	 * pre: recibe un string o linea que proviene del archivo de texto
-	 * post: obtiene el primer dato de la linea, lo elimina de la misma y luego
-	 * lo devuelve
-	 */
-	void procesarLineas();
 
 	/*
 	 * post: procesa lo que contiene una linea almacenando la informacion
@@ -156,7 +156,6 @@ private:
 	 *
 	 */
 	unsigned int longitud(std::string cadena);
-
 
 
 };

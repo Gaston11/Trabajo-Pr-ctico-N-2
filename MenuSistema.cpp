@@ -108,6 +108,10 @@ void MenuSistema::Menu(){
 	}
 }
 
+MenuSistema::~MenuSistema(){
+
+}
+
 void MenuSistema::detalleEntreEquipos(){
 
 	unsigned int equipo1, equipo2;

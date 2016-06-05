@@ -36,4 +36,8 @@ void Conexion::cambiarNombreAntena(std::string nombre){
 	this->nombreAntena = nombre;
 }
 
+Conexion::~Conexion(){
+
+}
+
 

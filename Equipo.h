@@ -113,6 +113,11 @@ public:
 	 */
 	unsigned int obtenerLlamadasEntranteOcupado();
 
+	/*
+	 * post: elimina los recuros utilizadas
+	 */
+	~Equipo();
+
 
 
 };

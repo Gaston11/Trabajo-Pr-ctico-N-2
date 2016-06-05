@@ -41,6 +41,11 @@ public:
 	 */
 	void Menu();
 
+	/*
+	 * post: elimina los recursos compartidos
+	 */
+	~MenuSistema();
+
 private:
 	/*
 	 * post: muestra detalle entre 2 equipos, mostrando:
@@ -146,6 +151,8 @@ private:
 	 * post: suma los minutos de las antenas utilizadas en una llamada
 	 */
 	unsigned int sumarDuracion(Lista<AntenaUtilizada*>* antenas);
+
+
 };
 
 #endif //MENUSISTEMA_H_INCLUDED

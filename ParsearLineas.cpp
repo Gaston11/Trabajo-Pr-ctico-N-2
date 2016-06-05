@@ -10,8 +10,8 @@
 
 ParsearLineas::ParsearLineas(std::string nombreArchivo){
 
-	this->antenas = 0;
-	this->equipos = 0;
+	this->antenas = new Lista<Antena*>;
+	this->equipos = new Lista<Equipo*>;
 
 	this->nombre = nombreArchivo;
 }
@@ -24,16 +24,6 @@ Lista<Antena*>* ParsearLineas::obtenerAntenas(){
 Lista<Equipo*>* ParsearLineas::obtenerEquipos(){
 
 	return this->equipos;
-}
-
-ParsearLineas::~ParsearLineas(){
-	this->antenas->iniciarCursor();
-	this->equipos->iniciarCursor();
-
-	while(this->antenas->avanzarCursor()||this->equipos->avanzarCursor()){
-		delete (this->antenas->obtenerCursor());
-		delete (this->equipos->obtenerCursor());
-	}
 }
 
 void ParsearLineas::procesarLineas(){
@@ -69,7 +59,7 @@ void ParsearLineas::guardarAntena(std::string datos){
 
 	//el archivo esta bien formado por ende las antenas no estan repetidas en el archivo
 	std::string nombre = this->obtenerDato(datos);
-	unsigned int cantidadDeConexiones = this->convertir_entero(datos);
+	unsigned int cantidadDeConexiones=this->convertir_entero(datos);// = datos;
 
 	Antena* antena = new Antena(nombre,cantidadDeConexiones);
 
@@ -89,7 +79,7 @@ void ParsearLineas::guardarConexion(std::string datos, std::string tipo){
 
 	std::string numero = this->obtenerDato(datos);
 	std::string nombreAntena = this->obtenerDato(datos);
-	unsigned int minuto = this->convertir_entero(datos);
+	unsigned int minuto=0; //= this->convertir_entero(datos);
 
 	//posicion = 0 pos invalida (lista vacia) mayor a 0 correcto
 	unsigned int posicionEquipo = this->buscarEquipo(numero);
@@ -158,7 +148,7 @@ void ParsearLineas::guardarLlamada(std::string datos, std::string tipo){
 
 	std::string numeroEmisor = this->obtenerDato(datos);
 	std::string numeroReceptor = this->obtenerDato(datos);
-	unsigned int  minutos = this->convertir_entero(datos);
+	unsigned int  minutos=0; //= this->convertir_entero(datos);
 
 	Equipo* equipoEmisor = this->equipos->obtener(this->buscarEquipo(numeroEmisor));
 	Equipo* equipoReceptor = this->equipos->obtener(this->buscarEquipo(numeroReceptor));
@@ -292,6 +282,20 @@ unsigned int ParsearLineas::buscarAntena(std::string nombre){
 	return pos;
 }
 
+ParsearLineas::~ParsearLineas(){
+	this->antenas->iniciarCursor();
+	this->equipos->iniciarCursor();
+	while(this->antenas->avanzarCursor()){
+		delete this->antenas->obtenerCursor();
+	}
+	while(this->equipos->avanzarCursor()){
+		delete this->equipos->obtenerCursor();
+	}
+	delete this->antenas;
+	delete this->equipos;
+
+}
+
 unsigned int ParsearLineas::longitud(std::string cadena)
 {
   unsigned int  valor = 0;
@@ -310,8 +314,29 @@ unsigned int ParsearLineas::convertir_entero(std::string cadena)
   unsigned int valor = 0;
   unsigned int lon = longitud(cadena);
 
-  for(i=lon-1; i>=0; i--)
+  for(i=lon-1; i>0; i--)
      valor += (cadena[ i ]-'0') * potencias[ lon-i-1 ];
 
   return valor;
 }
+
+/*
+unsigned int ParsearLineas::longitud(std::string cadena)
+{
+  unsigned int  valor = 0;
+  unsigned int i;
+
+  for(i=0; cadena[ i ]!='\0'; i++)
+     valor++;
+
+  return valor;
+}
+
+unsigned int ParsearLineas::convertir_entero(std::string cadena){
+	unsigned int lon = this->longitud(cadena);
+
+	  for(unsigned int i=lon-1; i>=0; i--)
+	     valor += (cadena[ i ]-'0') * potencias[ lon-i-1 ];
+}
+
+*/

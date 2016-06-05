@@ -121,6 +121,12 @@ class MenuAntena{
 		 * Post: ordena la lista antena por llamadas anuladas de mayor a menor.
 		 */
 		void ordenarAntenaPorAnuladas();
+
+		/*
+		 * post:elimina recursos utilizados
+		 */
+		~MenuAntena();
+
 };
 
 #endif //MENUANTENA_H_INCLUDED

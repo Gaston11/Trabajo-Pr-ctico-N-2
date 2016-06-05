@@ -17,7 +17,7 @@ class Antena{
 private:
 	std::string nombreAntena;
 	unsigned int cantidadConexiones;
-	unsigned int cantidadEquiposConectados; // Falta metodos de manipulacion
+	unsigned int cantidadEquiposConectados;
 	unsigned int cantidadLlamadasAnuladas;
 	Lista<Equipo*>* equiposQueConectaron;
 

@@ -9,8 +9,9 @@
 
 Equipo::Equipo(std::string numero){
 	this->numero = numero;
-	this->llamadas = 0;
-	this->ultimaConexionAntena = 0;   // falta metodo obtener ultima conexion
+	this->llamadas = new Lista<Llamada*>;
+	this->ultimaConexionAntena = new Conexion();
+
 	this->llamadasEntrantes = 0;
 	this->llamadasSalientes = 0;
 	this->entrantesOcupado = 0;
@@ -82,3 +83,11 @@ unsigned int Equipo::obtenerLlamadasEntranteOcupado(){
 	return this->entrantesOcupado;
 }
 
+Equipo::~Equipo(){
+	this->llamadas->iniciarCursor();
+	while(this->llamadas->avanzarCursor()){
+		delete this->llamadas->obtenerCursor();
+	}
+	delete (this->llamadas);
+	delete (this->ultimaConexionAntena);
+}

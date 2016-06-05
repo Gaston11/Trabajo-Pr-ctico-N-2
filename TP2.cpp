@@ -35,6 +35,7 @@ int main(){
 
 	//procesar archivo
 	ParsearLineas archivo(nombreArchivo);
+	archivo.procesarLineas();
 
 	Lista<Equipo*>* equipos = archivo.obtenerEquipos();
 	Lista<Antena*>* antenas = archivo.obtenerAntenas();
