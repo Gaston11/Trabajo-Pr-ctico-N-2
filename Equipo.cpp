@@ -31,9 +31,9 @@ Llamada* Equipo::obtenerUltimaLlamada(){
 	this->llamadas->iniciarCursor(); // el ultimo esta en la ultima posicion
 	bool encontrado=false;
 	Llamada* llamada;
-	while(this->llamadas->avanzarCursor() && !encontrado){
+	while((this->llamadas->avanzarCursor()) && !(encontrado)){
 		llamada=this->llamadas->obtenerCursor();
-		encontrado=(!llamada->estaFinalizada());
+		encontrado=(!(llamada->estaFinalizada()));
 	}
 	return llamada;
 
@@ -44,7 +44,7 @@ Conexion* Equipo::obtenerUltimaConexion(){
 }
 
 bool Equipo::estaConectado(){
-	return this->ultimaConexionAntena->estaConectado();
+	return (this->ultimaConexionAntena->estaConectado());
 }
 
 bool Equipo::estaOcupado(){

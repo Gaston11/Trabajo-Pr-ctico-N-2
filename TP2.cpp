@@ -55,11 +55,15 @@ int main(){
 		case '1':
 			//MENU DE LOS EQUIPOS
 			menuEquipos.Menu();
+			opcionesDeMenu();
+			cin >> opcion;
 			break;
 		case '2':
 			//MENU DE LAS ANTENAS
 
 			menuAntena.MenuPrincipal();   ///AGREGADO
+			opcionesDeMenu();
+			cin >> opcion;
 
 			break;
 		case '3':

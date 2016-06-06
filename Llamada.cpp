@@ -9,6 +9,7 @@
 #include "Equipo.h"
 
 Llamada::Llamada(std::string equipo, std::string tipo){
+
 	this->antenasUtilizadas = new Lista<AntenaUtilizada*>;
 	this->celular = equipo;
 
@@ -19,7 +20,7 @@ Llamada::Llamada(std::string equipo, std::string tipo){
 }
 
 Llamada::Llamada(std::string equipo){
-	this->antenasUtilizadas = 0;
+	this->antenasUtilizadas = new Lista<AntenaUtilizada*>;
 	this->celular = equipo;
 
 	this->llamadaEntrante = false;
@@ -57,7 +58,7 @@ void Llamada::cambiarOcupado(){
 }
 
 Lista<AntenaUtilizada*>* Llamada::obtenerAntenasUtilizadas(){
-	return this->antenasUtilizadas;
+	return (this->antenasUtilizadas);
 }
 
 Llamada::~Llamada(){

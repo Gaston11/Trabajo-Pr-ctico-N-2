@@ -34,6 +34,7 @@ std::string Conexion::obtenerNombreAntena(){
 
 void Conexion::cambiarNombreAntena(std::string nombre){
 	this->nombreAntena = nombre;
+	this->conectar();
 }
 
 Conexion::~Conexion(){

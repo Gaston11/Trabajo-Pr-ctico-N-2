@@ -6,8 +6,8 @@
  */
 
 
-#ifndef LISTA_H_INCLUDED
-#define LISTA_H_INCLUDED
+#ifndef LISTA_H_
+#define LISTA_H_
 
 #include "Nodo.h"
 
@@ -49,17 +49,17 @@ template<class T> class Lista {
 	        unsigned int contarElementos();
 
 	        /*
-   	         * pre : posición pertenece al intervalo: [1, contarElementos() + 1]
-   	         * post: agrega el elemento en la posición indicada.
-   	         *
-   	         */
-   	        void agregar(T elemento, unsigned int posicion);
-
-	        /*
 	         * post: agrega el elemento al final de la Lista, en la posición:
 	         *       contarElementos() + 1.
 	         */
 	        void agregar(T elemento);
+
+	        /*
+	         * pre : posición pertenece al intervalo: [1, contarElementos() + 1]
+	         * post: agrega el elemento en la posición indicada.
+	         *
+	         */
+	        void agregar(T elemento, unsigned int posicion);
 
 	        /*
 	         * post: agrega todos los elementos de otraLista
@@ -152,6 +152,10 @@ template <class T> unsigned int Lista<T>::contarElementos(){
 	return (this->tamanio);
 }
 
+template <class T> void Lista<T>::agregar(T elemento){
+	this->agregar(elemento, this->tamanio + 1);
+}
+
 template <class T> void Lista<T>::agregar(T elemento, unsigned int posicion){
 
 	if ((posicion >0)&&(posicion <= this->tamanio +1)){
@@ -160,9 +164,8 @@ template <class T> void Lista<T>::agregar(T elemento, unsigned int posicion){
 
 		if (posicion ==1){
 
-			nuevo->cambiarSiguiente(this->primero->obtenerSiguiente());
+			nuevo->cambiarSiguiente(this->primero);
 			this->primero = nuevo;
-
 
 		}else{
 
@@ -173,18 +176,6 @@ template <class T> void Lista<T>::agregar(T elemento, unsigned int posicion){
 
 		this->tamanio++;
 		this->iniciarCursor();
-	}
-}
-
-template <class T> void Lista<T>::agregar(T elemento){
-	//this->agregar(elemento, this->tamanio + 1);
-
-	Nodo<T>* nuevo = new Nodo<T>(elemento);
-	if (this->estaVacia()){
-		this->primero = nuevo;
-	}else{
-		Nodo<T>* anterior = this->obtenerNodo(this->tamanio);
-		anterior->cambiarSiguiente(nuevo);
 	}
 }
 

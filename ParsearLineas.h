@@ -49,9 +49,6 @@ public:
 	 */
 	~ParsearLineas();
 
-private:
-
-
 	/*
 	 * pre: recibe un string o linea que proviene del archivo de texto
 	 * post: obtiene el primer dato de la linea, lo elimina de la misma y luego
@@ -148,12 +145,12 @@ private:
 	void finalizarAntenaUtilizada(Equipo* emisor, unsigned int minuto);
 
 	/*
-	 *
+	 *post: obtiene una cadena de numeros y los convierte en un entero
 	 */
 	unsigned int convertir_entero(std::string cadena);
 
 	/*
-	 *
+	 * post: devuelve la longitud de una cadena
 	 */
 	unsigned int longitud(std::string cadena);
 
