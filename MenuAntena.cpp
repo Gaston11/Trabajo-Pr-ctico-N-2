@@ -9,7 +9,7 @@
 MenuAntena::MenuAntena(Lista<Antena*>* nuevaListaAntenas, Lista<Equipo*>* nuevaListaEquipos){
 	this->listaAntenas = nuevaListaAntenas;
 	this->listaEquipos = nuevaListaEquipos;
-	//this->ordenarAntenaPorAnuladas();
+	this->ordenarAntenaPorAnuladas();
 }
 
 void MenuAntena::MenuPrincipal(){
@@ -67,7 +67,7 @@ void MenuAntena::opcionesAntena(char opcion){
 	  	  	  			}
 						break;
 			case 'e' : {
-						std::cout<< "Equipo que mas le hablaron de la antena: ";    //
+						std::cout<< "Equipo que mas minutos le hablaron de la antena: ";    //
 						std::cout<< antenaActual->obtenerNombre()<<std::endl;
 						this->equipoAlQueMasLeHablaron(antenaActual );
 						}
@@ -81,24 +81,26 @@ void MenuAntena::opcionesAntena(char opcion){
 			case 'g' :	{
 						std::cout<< "Cantidad maxima de celulares utilizada en la antena: ";
 						std::cout<< antenaActual->obtenerNombre() << std::endl;
-						antenaActual->retornarCantidadDeEquiposConectados();;
+						std::cout<< antenaActual->retornarCantidadDeEquiposConectados() <<std::endl;
 						}
 						break;
 			case 'h' :  {
 						std::cout<< "Cantidad de llamadas anuladas por falta de capacidad en la antena: ";
 						std::cout<< antenaActual->obtenerNombre()<<std::endl;
-						antenaActual->retornarCantidadDeLlamadasAnuladas();
+						std::cout << antenaActual->retornarCantidadDeLlamadasAnuladas() <<std::endl;
+						std::cout <<std::endl;
 						}
 						break;
 			case 'i' :  {
 						std::cout<< "Nombre antena: " << antenaActual->obtenerNombre()<< std::endl;
 						std::cout<< "Cantidad maxima de celulares soportados: "<<
-									antenaActual->retornarCantidadDeConexiones();
+									antenaActual->retornarCantidadDeConexiones() << std::endl;
 						std::cout<< "Cantidad maxima de celulares utilizados: "<<
-								antenaActual->retornarCantidadDeEquiposConectados();
+								antenaActual->retornarCantidadDeEquiposConectados() << std::endl;
+						std::cout <<std::endl;
 						}
 						break;
-			case 'j' :  std::cout << "Saliendo del menu de Antenas" <<std:: endl;
+			case 'j' :  std::cout << "Saliendo del menu de Antenas..." <<std:: endl;
 						break;
 			default: std::cout<< "opcion invalida" <<std::endl;
 		}
@@ -106,15 +108,19 @@ void MenuAntena::opcionesAntena(char opcion){
 }
 
 void MenuAntena::mostrarPorPantalla(Equipo* equipo, unsigned int cantidad){
-	std::cout << "Numero de equipo: ";
-	std::cout << equipo->obtenerNumero();
-	std::cout << "Cantidad: ";
-	std::cout << cantidad<< std::endl;
-	std::cout << std::endl;
+	if (cantidad != 0){
+		std::cout << "Numero de equipo: ";
+		std::cout << equipo->obtenerNumero();
+		std::cout << "  Cantidad: ";
+		std::cout << cantidad<< std::endl;
+		std::cout << std::endl;
+	}
+	else
+		std::cout<< "No hay Equipos que cumplan los requisitos..." << std::endl;
 }
 
 
-void MenuAntena::equipoQueMasHablo(Antena* antena){   // para opcion b)  realizada true, ocupado false, entrante false.
+void MenuAntena::equipoQueMasHablo(Antena* antena){  //opcion a
 		Equipo* equipoQueMasHablo, *equipoActual;       			// contar minutos
 		Lista<Llamada*>* llamadas;
 		unsigned int cantidadMinutos, cantidadMinutosDelQueMasHablo =0;
@@ -125,22 +131,23 @@ void MenuAntena::equipoQueMasHablo(Antena* antena){   // para opcion b)  realiza
 		while (listaEquiposQueConectaron->avanzarCursor()){
 			equipoActual = listaEquiposQueConectaron->obtenerCursor();
 			llamadas = equipoActual->obtenerLLamadasEquipo();
-			cantidadMinutos = contarMinutosDeLlamadaEntrante(llamadas, antena->obtenerNombre());
+			cantidadMinutos = contarMinutosDeLlamadaRealizada(llamadas, antena->obtenerNombre());
 			this->compararValores(cantidadMinutos,cantidadMinutosDelQueMasHablo,equipoActual,equipoQueMasHablo);
 		}
 		this-> mostrarPorPantalla (equipoQueMasHablo, cantidadMinutosDelQueMasHablo);
 }
 
-unsigned int MenuAntena::contarMinutosDeLlamadaEntrante(Lista<Llamada*>* llamadas, std::string nombreAntena){
+unsigned int MenuAntena::contarMinutosDeLlamadaRealizada(Lista<Llamada*>* llamadas, std::string nombreAntena){
 	Llamada* llamadaActual;
 	unsigned int minutos =0;
 
 	llamadas->iniciarCursor();
 	while(llamadas->avanzarCursor()){
-		llamadaActual = llamadas->obtenerCursor();
-		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && !llamadaActual->esOcupado())
+		llamadaActual = llamadas->obtenerCursor();											//VEEEER OCUPADO
+		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && llamadaActual->esOcupado())
 			minutos = minutos +  this->contarMinutosAntena(llamadaActual, nombreAntena );
-		}
+	}
+
 	return minutos;
 }
 
@@ -159,7 +166,7 @@ unsigned int MenuAntena::contarMinutosAntena(Llamada* llamadaActual, std::string
 	return minutos;
 }
 
-void MenuAntena::equipoQueMasLlamo(Antena* antena){    // para opcion c
+void MenuAntena::equipoQueMasLlamo(Antena* antena){    // para opcion b
 	Equipo* equipoQueMasLlamo, *equipoActual;
 	Lista<Llamada*>* llamadas;
 	unsigned int cantidadLlamadas, cantidadMaximaDeLlamadas =0;
@@ -183,7 +190,7 @@ unsigned int MenuAntena::contarLlamadasRealizadas(Lista<Llamada*>* llamadas, std
 	llamadas->iniciarCursor();
 	while(llamadas->avanzarCursor()){
 		llamadaActual = llamadas->obtenerCursor();
-		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && !llamadaActual->esOcupado()
+		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && llamadaActual->esOcupado()
 			 && this->antenaUsadaEnLlamada(llamadaActual->obtenerAntenasUtilizadas(), nombreAntena ) )
 				cantidadLlamadas++;
 	}
@@ -203,7 +210,7 @@ bool MenuAntena::antenaUsadaEnLlamada(Lista<AntenaUtilizada*>* antenasUtilizadas
 	return antenaEncontrada;
 }
 
-void MenuAntena::equipoQueMasLeDioOcupadoAlRealizarLlamada(Antena* antena){ //PREGUNTAR  para opcion d)
+void MenuAntena::equipoQueMasLeDioOcupadoAlRealizarLlamada(Antena* antena){  //  para opcion c) FALTA CHEQUEAR
 	Equipo* equipoQueMasLlamo, *equipoActual;
 	Lista<Llamada*>* llamadas;
 	unsigned int cantidadLlamadasOcupado, cantidadMaximaDeLlamadasOcupado =0;
@@ -235,7 +242,7 @@ unsigned int MenuAntena::contarLlamadasRealizadasOcupado(Lista<Llamada*>* llamad
 
 }
 
-void MenuAntena::equipoAlQueMasLlamaron(Antena* antena){       // para opcion e)  cantidad llamadas
+void MenuAntena::equipoAlQueMasLlamaron(Antena* antena){       // para opcion D)  cantidad llamadas
 	Equipo* equipoQueMasLlamaron, *equipoActual;
 	Lista<Llamada*>* llamadas;
 	unsigned int cantidadLlamadas, cantidadMaximaDeLlamadas =0;
@@ -259,14 +266,14 @@ unsigned int MenuAntena::contarLlamadasEntrantes(Lista<Llamada*>* llamadas, std:
 	llamadas->iniciarCursor();
 	while(llamadas->avanzarCursor()){
 		llamadaActual = llamadas->obtenerCursor();
-		if ( llamadaActual->esLlamadaRealizada() && llamadaActual->esLlamadaEntrante() && !llamadaActual->esOcupado()
+		if ( !llamadaActual->esLlamadaRealizada() && llamadaActual->esLlamadaEntrante() && llamadaActual->esOcupado()
 					&&  this-> antenaUsadaEnLlamada(llamadaActual->obtenerAntenasUtilizadas(), nombreAntena))
 			cantidadLlamadas++;
 		}
 	return cantidadLlamadas;
 }
 
-void MenuAntena::equipoAlQueMasLeHablaron(Antena* antena ){  //para opcion f)
+void MenuAntena::equipoAlQueMasLeHablaron(Antena* antena ){  //para opcion e)
 	Equipo* equipoQueMasLeHablaron, *equipoActual;
 	Lista<Llamada*>* llamadas;
 	unsigned int cantidadMinutos, cantidadMinutosDelQueMasLeHablaron=0;
@@ -291,13 +298,13 @@ unsigned int MenuAntena::contarMinutosDeLlamadasRecibidas(Lista<Llamada*>* llama
 	llamadas->iniciarCursor();
 	while(llamadas->avanzarCursor()){
 		llamadaActual = llamadas->obtenerCursor();
-		if (llamadaActual->esLlamadaRealizada() && !llamadaActual->esLlamadaEntrante() && !llamadaActual->esOcupado())
+		if (!llamadaActual->esLlamadaRealizada() && llamadaActual->esLlamadaEntrante() && llamadaActual->esOcupado())
 			minutos = minutos +  this->contarMinutosAntena(llamadaActual, nombreAntena);
 		}
 		return minutos;
 }
 
-void MenuAntena::equipoQueMasDioOcupadoAlLlamarlo(Antena* antena){  //PREGUNTAR   para opcion g)
+void MenuAntena::equipoQueMasDioOcupadoAlLlamarlo(Antena* antena){  //FALTA CHEQUEAR   para opcion f)
 	Equipo* equipoQueMasLlamo, *equipoActual;
 	Lista<Llamada*>* llamadas;
 	unsigned int cantidadLlamadasOcupado, cantidadMaximaDeLlamadasOcupado =0;
