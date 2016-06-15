@@ -13,8 +13,8 @@ Llamada::Llamada(std::string equipo, std::string tipo){
 	this->antenasUtilizadas = new Lista<AntenaUtilizada*>;
 	this->celular = equipo;
 
-	this->llamadaEntrante = true;
-	this->llamadaRealizada = false;
+	this->llamadaEntrante = false;
+	this->llamadaRealizada = true;
 	this->llamadaFinalizada = false;
 	this->ocupado = false;
 }
@@ -23,8 +23,8 @@ Llamada::Llamada(std::string equipo){
 	this->antenasUtilizadas = new Lista<AntenaUtilizada*>;
 	this->celular = equipo;
 
-	this->llamadaEntrante = false;
-	this->llamadaRealizada = true;
+	this->llamadaEntrante = true;
+	this->llamadaRealizada = false;
 	this->llamadaFinalizada = false;
 	this->ocupado = false;
 }

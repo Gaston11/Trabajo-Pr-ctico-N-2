@@ -152,6 +152,10 @@ private:
 	 */
 	unsigned int sumarDuracion(Lista<AntenaUtilizada*>* antenas);
 
+	/*
+	 * post: remueve todos los elementos de una lista de equipos
+	 */
+	void removerLista(Lista<Equipo*>* equipos);
 
 };
 

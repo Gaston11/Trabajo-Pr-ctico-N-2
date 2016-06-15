@@ -108,7 +108,11 @@ void ParsearLineas::conectarEquipo(Antena* antena, std::string numero, unsigned 
 		}else{
 			equipo = this->equipos->obtener(posicionEquipo);
 			Llamada* llamada= equipo->obtenerUltimaLlamada();
-			this->guardarAntenaUtilizada(equipo,minuto,llamada);
+			if (!llamada->estaFinalizada()){
+				AntenaUtilizada* antenaNueva= new AntenaUtilizada(antena->obtenerNombre(),minuto);
+				Lista<AntenaUtilizada*>* antenas = llamada->obtenerAntenasUtilizadas();
+				antenas->agregar(antenaNueva);
+			}
 
 		}
 		Lista<Equipo*>* equiposQueConectaron = antena->obtenerEquiposQueConectaron();
@@ -180,7 +184,7 @@ void ParsearLineas::agregarLlamadaInicio(Equipo* equipoEmisor, Equipo* equipoRec
 	this->guardarAntenaUtilizada(equipoEmisor, minuto, llamadaEmisor);
 	this->guardarAntenaUtilizada(equipoReceptor, minuto, llamadaReceptor);
 
-	if (!equipoReceptor->estaOcupado()){
+	if (equipoReceptor->estaOcupado()&&(equipoReceptor->obtenerUltimaLlamada()->obtenerCelular()==equipoEmisor->obtenerNumero())){
 		//incrementa el contador de los equipos en llamdas
 		equipoEmisor->incrementarLlamadasSalientes();
 		equipoReceptor->incrementarLlamadasEntrantes();

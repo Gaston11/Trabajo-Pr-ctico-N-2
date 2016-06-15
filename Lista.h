@@ -217,7 +217,7 @@ template <class T> void Lista<T>::remover(unsigned int posicion){
 
 		}
 		delete removido;
-		this->tamanio++;
+		this->tamanio--;
 
 		this->iniciarCursor();
 	}

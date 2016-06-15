@@ -47,7 +47,7 @@ class MenuAntena{
 		/*
 		 * post: retorna los minutos de llamadas entrante de la lista llamadas
 		 */
-		unsigned int contarMinutosDeLlamadaEntrante(Lista<Llamada*>* llamadas, std::string nombreAntena);
+		unsigned int contarMinutosDeLlamadaRealizada(Lista<Llamada*>* llamadas, std::string nombreAntena);
 
 		/*
 		 * post: retorna los minutos de llamadas entrante de la lista antenas utilizadas

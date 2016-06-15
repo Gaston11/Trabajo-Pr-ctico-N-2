@@ -161,13 +161,16 @@ unsigned int MenuSistema::cantidadAntenasUtilizadas(Equipo* equipo){
 
 void MenuSistema::equipoQueMasHablo(){
 	this->equipos->iniciarCursor();
-	Equipo* equipo; Lista<Equipo*>* equiposMaximos;
+	Equipo* equipo;
+	Lista<Equipo*>* equiposMaximos = new Lista<Equipo*>;
 	unsigned int cantidadMinutos=0, minutosMaximos=0;
+
 	while (this->equipos->avanzarCursor()){
 		equipo=this->equipos->obtenerCursor();
 		cantidadMinutos=this->calculaMinutosHablado(equipo);
+
 		if(cantidadMinutos > minutosMaximos){
-			equiposMaximos=0;
+			this->removerLista(equiposMaximos);
 			equiposMaximos->agregar(equipo);
 			minutosMaximos=cantidadMinutos;
 		}else if(cantidadMinutos == minutosMaximos){
@@ -178,19 +181,21 @@ void MenuSistema::equipoQueMasHablo(){
 	std::cout<<"Cantidad de minutos: ";
 	std::cout<< minutosMaximos<<std::endl;
 	this->mostrarEquipos(equiposMaximos);
+
+	delete equiposMaximos;
 }
 
 void MenuSistema::celularQueMasLlamo(){
 	this->equipos->iniciarCursor();
 	Equipo* equipo;
-	Lista<Equipo*>* equiposQueMasLlamaron;
+	Lista<Equipo*>* equiposQueMasLlamaron = new Lista<Equipo*>;
 	unsigned int cantidad=0;
 
 	while(this->equipos->avanzarCursor()){
 		equipo=this->equipos->obtenerCursor();
 
 		if (equipo->obtenerLlamadasSalientes()>cantidad){
-			equiposQueMasLlamaron=0;
+			this->removerLista(equiposQueMasLlamaron);
 			equiposQueMasLlamaron->agregar(equipo);
 			cantidad = equipo->obtenerLlamadasSalientes();
 		}else if(equipo->obtenerLlamadasSalientes()==cantidad){
@@ -201,20 +206,22 @@ void MenuSistema::celularQueMasLlamo(){
 	std::cout<<"Cantidad: ";
 	std::cout<< cantidad<<std::endl;
 	this->mostrarEquipos(equiposQueMasLlamaron);
+
+	delete equiposQueMasLlamaron;
 }
 
 void MenuSistema::equipoQueMasDioOcupado(){
 
 	this->equipos->iniciarCursor();
 	Equipo* equipo;
-	Lista<Equipo*>* equiposMasDioOcupado;
+	Lista<Equipo*>* equiposMasDioOcupado = new Lista<Equipo*>;
 	unsigned int maximoSalienteOcupado=0;
 
 	while(this->equipos->avanzarCursor()){
 		equipo=this->equipos->obtenerCursor();
 
 		if(equipo->obtenerLlamadasSalienteOcupado()>maximoSalienteOcupado){
-			equiposMasDioOcupado = 0;
+			this->removerLista(equiposMasDioOcupado);
 			equiposMasDioOcupado->agregar(equipo);
 			maximoSalienteOcupado=equipo->obtenerLlamadasSalienteOcupado();
 		}else if(equipo->obtenerLlamadasSalienteOcupado()==maximoSalienteOcupado){
@@ -225,13 +232,17 @@ void MenuSistema::equipoQueMasDioOcupado(){
 	std::cout<<"Equipo/s que mas dio ocupado en sus intentos de llamadas: "<<std::endl;
 	std::cout<<"Cantidad de veces: ";
 	std::cout<< maximoSalienteOcupado<<std::endl;
-	this->mostrarEquipos(equiposMasDioOcupado);
+	if (maximoSalienteOcupado>0){
+		this->mostrarEquipos(equiposMasDioOcupado);
+	}else{std::cout << "No existen equipos que cumplan con estas caracteristicas"<<std::endl;}
+
+	delete equiposMasDioOcupado;
 }
 
 void MenuSistema::equipoAlQueMasHablaron(){
 
 	this->equipos->iniciarCursor();
-	Equipo* equipo; Lista<Equipo*>* equiposAlQueMasHablaron;
+	Equipo* equipo; Lista<Equipo*>* equiposAlQueMasHablaron = new Lista<Equipo*>;
 	unsigned int cantidadMinutosHablaron=0, maximoMinutosHablaron=0;
 
 	while(this->equipos->avanzarCursor()){
@@ -239,7 +250,7 @@ void MenuSistema::equipoAlQueMasHablaron(){
 		cantidadMinutosHablaron = this->calcularMinutosHablaron(equipo);
 
 		if(cantidadMinutosHablaron > maximoMinutosHablaron){
-			equiposAlQueMasHablaron=0;
+			this->removerLista(equiposAlQueMasHablaron);
 			equiposAlQueMasHablaron->agregar(equipo);
 			maximoMinutosHablaron=cantidadMinutosHablaron;
 		}else if(cantidadMinutosHablaron == maximoMinutosHablaron){
@@ -249,20 +260,26 @@ void MenuSistema::equipoAlQueMasHablaron(){
 	std::cout << "Equipo/s que mas hablaron: "<<std::endl;
 	std::cout << "Cantidad de minutos: ";
 	std::cout << maximoMinutosHablaron << std::endl;
-	this->mostrarEquipos(equiposAlQueMasHablaron);
+
+	if (maximoMinutosHablaron>0){
+		this->mostrarEquipos(equiposAlQueMasHablaron);
+	}else{std::cout << "No existen equipos que cumplan estas caracteristicas"<<std::endl;}
+
+	delete equiposAlQueMasHablaron;
 }
 
 void MenuSistema::equipoMasOcupado(){
 
 	this->equipos->iniciarCursor();
-	Equipo* equipo; Lista<Equipo*>* equiposMasOcupado;
+	Equipo* equipo; Lista<Equipo*>* equiposMasOcupado = new Lista<Equipo*>;
 	unsigned int maximoOcupado=0;
 
 	while(this->equipos->avanzarCursor()){
 		equipo=this->equipos->obtenerCursor();
 
 		if(equipo->obtenerLlamadasEntranteOcupado()>maximoOcupado){
-			equiposMasOcupado=0;
+
+			this->removerLista(equiposMasOcupado);
 			equiposMasOcupado->agregar(equipo);
 			maximoOcupado=equipo->obtenerLlamadasEntranteOcupado();
 		}else if(equipo->obtenerLlamadasEntranteOcupado()== maximoOcupado){
@@ -272,20 +289,26 @@ void MenuSistema::equipoMasOcupado(){
 	std::cout << "Equipo/s que estuvo mas ocupado: " << std::endl;
 	std::cout << "Cantidad de veces: ";
 	std::cout << maximoOcupado << std::endl;
+
+	if (maximoOcupado>0){
 	this->mostrarEquipos(equiposMasOcupado);
+	}else{std::cout << "No existen equipos con estas caracteristicas"<<std::endl;}
+
+	delete equiposMasOcupado;
 }
 
 void MenuSistema::equipoQueMasLlamaron(){
 
 	this->equipos->iniciarCursor();
-	Equipo* equipo; Lista<Equipo*>* equiposMasLlamaron;
+	Equipo* equipo;
+	Lista<Equipo*>* equiposMasLlamaron = new Lista<Equipo*>;
 	unsigned int maximaEntrante=0;
 
 	while(this->equipos->avanzarCursor()){
 		equipo=this->equipos->obtenerCursor();
 
 		if (equipo->obtenerLlamadasEntrantes()>maximaEntrante){
-			equiposMasLlamaron =0;
+			this->removerLista(equiposMasLlamaron);
 			equiposMasLlamaron->agregar(equipo);
 			maximaEntrante = equipo->obtenerLlamadasEntrantes();
 		}else if(equipo->obtenerLlamadasEntrantes()==maximaEntrante){
@@ -295,7 +318,12 @@ void MenuSistema::equipoQueMasLlamaron(){
 	std::cout << "Equipo/s que mas llamada/s recibio: " << std::endl;
 	std::cout << "Cantidad de llamadas: " ;
 	std::cout << maximaEntrante << std::endl;
-	this->mostrarEquipos(equiposMasLlamaron);
+
+	if(maximaEntrante >0){
+		this->mostrarEquipos(equiposMasLlamaron);
+	}else{std::cout << "No existen equipos con estas caracteristicas"<<std::endl;}
+
+	delete equiposMasLlamaron;
 }
 
 void MenuSistema::detalleDeEquipos(){
@@ -440,4 +468,10 @@ unsigned int MenuSistema::sumarDuracion(Lista<AntenaUtilizada*>* antenas){
 		minutos+=antena->duracionDeMinutosEnAntena();
 	}
 	return minutos;
+}
+
+void MenuSistema::removerLista(Lista<Equipo*>* equipos){
+	for (unsigned int posicion = 1; posicion < equipos->contarElementos()+1; posicion++){
+		equipos->remover(posicion);
+	}
 }

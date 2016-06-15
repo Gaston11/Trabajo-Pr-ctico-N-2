@@ -55,7 +55,7 @@ void MenuAntena::opcionesAntena(char opcion){
 					  }
 						break;
 			case 'c' :  {
-						std::cout<< "Equipo que mas dio ocupado de la antena: ";
+						std::cout<< "Equipo que mas le dio ocupado de la antena: ";
 						std::cout<< antenaActual->obtenerNombre()<<std::endl;
 						this->equipoQueMasLeDioOcupadoAlRealizarLlamada(antenaActual);
 			  	  	  	}
@@ -79,14 +79,14 @@ void MenuAntena::opcionesAntena(char opcion){
 						}
 						break;
 			case 'g' :	{
-						std::cout<< "Cantidad maxima de celulares utilizada en la antena: ";
-						std::cout<< antenaActual->obtenerNombre() << std::endl;
+						std::cout<< "Cantidad maxima de celulares utilizada en la antena ";
+						std::cout<< antenaActual->obtenerNombre() << ": ";
 						std::cout<< antenaActual->retornarCantidadDeEquiposConectados() <<std::endl;
 						}
 						break;
 			case 'h' :  {
-						std::cout<< "Cantidad de llamadas anuladas por falta de capacidad en la antena: ";
-						std::cout<< antenaActual->obtenerNombre()<<std::endl;
+						std::cout<< "Cantidad de llamadas anuladas por falta de capacidad en la antena ";
+						std::cout<< antenaActual->obtenerNombre()<< ": ";
 						std::cout << antenaActual->retornarCantidadDeLlamadasAnuladas() <<std::endl;
 						std::cout <<std::endl;
 						}
@@ -96,7 +96,7 @@ void MenuAntena::opcionesAntena(char opcion){
 						std::cout<< "Cantidad maxima de celulares soportados: "<<
 									antenaActual->retornarCantidadDeConexiones() << std::endl;
 						std::cout<< "Cantidad maxima de celulares utilizados: "<<
-								antenaActual->retornarCantidadDeEquiposConectados() << std::endl;
+								antenaActual->obtenerEquiposQueConectaron()->contarElementos() << std::endl;
 						std::cout <<std::endl;
 						}
 						break;
@@ -113,10 +113,10 @@ void MenuAntena::mostrarPorPantalla(Equipo* equipo, unsigned int cantidad){
 		std::cout << equipo->obtenerNumero();
 		std::cout << "  Cantidad: ";
 		std::cout << cantidad<< std::endl;
-		std::cout << std::endl;
 	}
 	else
 		std::cout<< "No hay Equipos que cumplan los requisitos..." << std::endl;
+	std::cout << std::endl;
 }
 
 
