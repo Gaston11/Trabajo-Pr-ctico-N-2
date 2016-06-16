@@ -14,14 +14,13 @@
 class MenuAntena{
 	private:
 		Lista<Antena*>* listaAntenas;
-		Lista<Equipo*>* listaEquipos;
 
 	public:
 		/*
 		 * Constructor
 		 * post: crea un menu con los datos de: Listas de equipos y Lista de antenas
 		 */
-		MenuAntena(Lista<Antena*>* nuevaListaAntenas, Lista<Equipo*>* nuevaListaEquipos);
+		MenuAntena(Lista<Antena*>* nuevaListaAntenas);
 
 		/*
 		 * Post: realiza el metodo que corresponda del menu
@@ -36,7 +35,7 @@ class MenuAntena{
 		/*
 		 * Post: muestra por pantalla el numero del equipo y la cantidad indicada ( minutos o llamadas)
 		 */
-		void mostrarPorPantalla(Equipo* equipo, unsigned int cantidad);
+		void mostrarPorPantalla(Lista<Equipo*>* listaEquipos,unsigned int cantidad);
 
 
 		/*
@@ -115,7 +114,7 @@ class MenuAntena{
 		 * post: compara valores enteros y cambia el valor actual y el equipo Actual en caso de que
 		 *  el primero valor sea mayor al maximo actual.
 		 */
-		void compararValores(unsigned int nuevoValor, unsigned int &maximoActual, Equipo* equipoNuevo, Equipo* &equipoMaximo);
+		void compararValores(unsigned int nuevoValor, unsigned int &maximoActual, Equipo* equipoNuevo, Lista<Equipo*>* listaEquipos);
 
 		/*
 		 * Post: ordena la lista antena por llamadas anuladas de mayor a menor.
