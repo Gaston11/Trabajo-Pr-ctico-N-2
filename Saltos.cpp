@@ -22,21 +22,26 @@ Saltos::Saltos(Lista<Equipo*>* equipos, Lista<Antena*>* antenas){
 
 void Saltos::cantidadSaltos(){
 	//contabilizar la cantidad de saltos con los equipos
-	this->contabilizarSaltos();
 
-	std::cout<<"Cantidad de saltos por cada par de antenas: "<<std::endl;
-	for (unsigned int fila=0;fila<this->rango;fila++){
-		for (unsigned int columna=fila+1; columna<this->rango;columna++){
+	if (this->antenas->contarElementos() > 1 ){
+		this->contabilizarSaltos();
 
-			std::cout << this->antenas->obtener(fila+1)->obtenerNombre();
-			std::cout << " - ";
-			std::cout << this->antenas->obtener(columna+1)->obtenerNombre();
-			std::cout << " ";
-			std::cout << this->matriz[fila][columna];
-			std::cout << " saltos "<<std::endl;
-		}
+		std::cout<<"Cantidad de saltos por cada par de antenas: "<<std::endl;
+		for (unsigned int fila=0;fila<this->rango;fila++){
+			for (unsigned int columna=fila+1; columna<this->rango;columna++){
 
-	}
+				std::cout << this->antenas->obtener(fila+1)->obtenerNombre();
+				std::cout << " - ";
+				std::cout << this->antenas->obtener(columna+1)->obtenerNombre();
+				std::cout << " ";
+				std::cout << this->matriz[fila][columna];
+				std::cout << " saltos "<<std::endl;
+				}
+
+			}
+	}else
+		std::cout<<"Cantidad de saltos por cada par de antenas: 0 "<<std::endl;
+
 }
 
 void Saltos::contabilizarSaltos(){
