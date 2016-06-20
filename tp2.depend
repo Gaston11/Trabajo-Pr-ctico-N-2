@@ -1,0 +1,87 @@
+# depslib dependency file v1.0
+1466261899 source:c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\antena.cpp
+	"Antena.h"
+	"Lista.h"
+
+1466261899 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\antena.h
+	<string>
+	"Equipo.h"
+
+1466261899 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\equipo.h
+	<string>
+	"Conexion.h"
+	"Llamada.h"
+
+1466261899 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\conexion.h
+	<string>
+
+1466261899 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\llamada.h
+	"AntenaUtilizada.h"
+	"Lista.h"
+	"Equipo.h"
+
+1466261899 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\antenautilizada.h
+	<string>
+
+1466261899 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\lista.h
+	"Nodo.h"
+
+1466261899 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\nodo.h
+
+1466261899 source:c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\antenautilizada.cpp
+	"AntenaUtilizada.h"
+
+1466261899 source:c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\conexion.cpp
+	"Conexion.h"
+
+1466261899 source:c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\equipo.cpp
+	"Equipo.h"
+
+1466261899 source:c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\llamada.cpp
+	"Llamada.h"
+	"Equipo.h"
+
+1466261899 source:c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\menuantena.cpp
+	"MenuAntena.h"
+
+1466261899 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\menuantena.h
+	"Antena.h"
+	"Equipo.h"
+	<iostream>
+
+1466261899 source:c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\menusistema.cpp
+	"MenuSistema.h"
+
+1466261899 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\menusistema.h
+	"Equipo.h"
+	<iostream>
+
+1466261899 source:c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\parsearlineas.cpp
+	"ParsearLineas.h"
+
+1466261899 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\parsearlineas.h
+	<string>
+	<fstream>
+	"Antena.h"
+	"Equipo.h"
+
+1466455386 source:c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\saltos.cpp
+	"Saltos.h"
+
+1466435869 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\saltos.h
+	"Grafo.h"
+	"Equipo.h"
+	"Antena.h"
+	<iostream>
+
+1466435869 c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\grafo.h
+	"Lista.h"
+
+1466435869 source:c:\algoritmosii\telefonia_tp2\trabajo-pr-ctico-n-2\tp2.cpp
+	<iostream>
+	<fstream>
+	"ParsearLineas.h"
+	"MenuAntena.h"
+	"MenuSistema.h"
+	"Saltos.h"
+

@@ -60,7 +60,7 @@ void Saltos::procesarLlamadas(Lista<Llamada*>* llamadas){
 	Lista<AntenaUtilizada*>* antenasUtilizadas;
 	while(llamadas->avanzarCursor()){
 		llamada=llamadas->obtenerCursor();
-		if (!llamada->esOcupado()){
+		if (llamada->esOcupado()){
 			antenasUtilizadas = llamada->obtenerAntenasUtilizadas();
 			this->procesarAntenas(antenasUtilizadas);
 		}
