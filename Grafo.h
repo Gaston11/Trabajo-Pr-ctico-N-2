@@ -5,6 +5,7 @@
  *      Author: noe
  */
 
+#include "Lista.h"
 
 template <class T> class Grafo{
 	//nodos que son los vertices en este caso antenas
@@ -121,11 +122,11 @@ void Grafo<T>::agregarVertice(T vertice){
 
 template <class T>
 void Grafo<T>::agregarArista(T verticeInicial, T verticeFinal){
-	unsigned int posicionInicial, posicionFinal, pos=0;
+	unsigned int posicionInicial;
 
 	if(this->existeVertice(verticeInicial) && this->existeVertice(verticeFinal)){
 		posicionInicial = this->obtenerPosicionVertice(verticeInicial);
-		this->aristas->obtener(posicionInicial)->obtenerCursor()->agregar(verticeFinal); //agregar posicion O vertice ??
+		this->aristas->obtener(posicionInicial)->agregar(verticeFinal); //agregar posicion O vertice ??
 
 	}
 

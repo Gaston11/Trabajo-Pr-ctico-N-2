@@ -11,6 +11,7 @@
 #include "ParsearLineas.h"
 #include "MenuAntena.h"
 #include "MenuSistema.h"
+#include "Saltos.h"
 
 using namespace std;
 
@@ -39,8 +40,11 @@ int main(){
 
 	Lista<Equipo*>* equipos = archivo.obtenerEquipos();
 	Lista<Antena*>* antenas = archivo.obtenerAntenas();
-	MenuAntena menuAntena(antenas,equipos); // AGREGADOO
+	MenuAntena menuAntena(antenas); // AGREGADOO
 	MenuSistema menuEquipos(equipos);
+
+	Saltos saltosAntenas(equipos,antenas);
+	saltosAntenas.cantidadSaltos();
 
 	char opcion;
 
