@@ -8,12 +8,14 @@
 #ifndef CONEXION_H_INCLUDED
 #define CONEXION_H_INCLUDED
 
-#include <string>
+#include "Antena.h"
+
+class Antena;
 
 class Conexion{
 
 private:
-	std::string nombreAntena;
+	Antena* antena;
 	bool conectado;
 
 public:
@@ -27,7 +29,7 @@ public:
 	 * pre : si no esta conectado a una antena
 	 * post: inicializa la conexion
 	 */
-	Conexion(std::string nombre);
+	Conexion(Antena* antena);
 
 	/*
 	 * post: conecta la antena
@@ -47,13 +49,13 @@ public:
 	/*
 	 * post: devuelve el nombre de la antena
 	 */
-	std::string obtenerNombreAntena();
+	Antena* obtenerAntena();
 
 	/*
 	 * post: cambia el nombre de la antena a la que esta conectada
 	 * y se conecta
 	 */
-	void cambiarNombreAntena(std::string nombre);
+	void cambiarAntena(Antena* nuevaAntena);
 
 	/*
 	 * post: elimina los recursos compartidos

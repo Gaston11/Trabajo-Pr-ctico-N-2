@@ -7,12 +7,15 @@
 #ifndef ANTENAUTILIZADA_H_INCLUDED
 #define ANTENAUTILIZADA_H_INCLUDED
 
-#include <string>
+
+#include "Antena.h"
+
+class Antena;
 
 class AntenaUtilizada {
 
 private:
-	std::string nombreAntena;//o puntero a antena ???
+	Antena* antena;
 	unsigned int minutoIniciado;
 	unsigned int minutoFinalizado;
 
@@ -21,12 +24,12 @@ public:
 	 * post: inicia la antena utilizada durante una llamada y el tiempo
 	 * en el que inicio
 	 */
-	AntenaUtilizada(std::string nombre, unsigned int minuto);
+	AntenaUtilizada(Antena* antena, unsigned int minuto);
 
 	/*
-	 * post: devuelve el nombre de la antena
+	 * post: devuelve la antena utilizada
 	 */
-	std::string obtenerNombreAntena();
+	Antena* obtenerAntena();
 
 	/*
 	 * pre: cuando finaliza la conexion en esta antena

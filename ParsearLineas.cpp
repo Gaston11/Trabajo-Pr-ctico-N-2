@@ -1,12 +1,12 @@
 /*
  * ParsearLineas.cpp
  *
- *  Created on: 22 de may. de 2016
+ *  Created on: 25 de jun. de 2016
  *      Author: noe
  */
 
-#include "ParsearLineas.h"
 
+#include "ParsearLineas.h"
 
 ParsearLineas::ParsearLineas(std::string nombreArchivo){
 
@@ -109,7 +109,7 @@ void ParsearLineas::conectarEquipo(Antena* antena, std::string numero, unsigned 
 			equipo = this->equipos->obtener(posicionEquipo);
 			Llamada* llamada= equipo->obtenerUltimaLlamada();
 			if (!llamada->estaFinalizada()){
-				AntenaUtilizada* antenaNueva= new AntenaUtilizada(antena->obtenerNombre(),minuto);
+				AntenaUtilizada* antenaNueva= new AntenaUtilizada(antena,minuto);
 				Lista<AntenaUtilizada*>* antenas = llamada->obtenerAntenasUtilizadas();
 				antenas->agregar(antenaNueva);
 			}
@@ -120,7 +120,7 @@ void ParsearLineas::conectarEquipo(Antena* antena, std::string numero, unsigned 
 
 		antena->incrementarCantidadEquiposConectados();
 		Conexion* conexion = equipo->obtenerUltimaConexion();
-		conexion->cambiarNombreAntena(antena->obtenerNombre());
+		conexion->cambiarAntena(antena);
 	}
 	//si no hay capacidad en antena espera hasta conetar con otra
 
@@ -129,23 +129,14 @@ void ParsearLineas::conectarEquipo(Antena* antena, std::string numero, unsigned 
 void ParsearLineas::desconectarEquipo(Antena* antena, std::string numero, unsigned int posicionEquipo, unsigned int minuto){
 
 	Equipo* equipo = this->equipos->obtener(posicionEquipo);
-	Lista<Llamada*>* llamadas = equipo->obtenerLLamadasEquipo();
-	llamadas->iniciarCursor();
-	bool encontrado = false;
-	Llamada* llamada;
-	//busca en llamdas la llamada que no finalizo
-	while(llamadas->avanzarCursor() && ! encontrado){
-		llamada = llamadas->obtenerCursor();
-		encontrado=(!llamada->estaFinalizada());
-	}
-	if (encontrado){
-		Equipo* equipoReceptor = this->equipos->obtener(this->buscarEquipo(llamada->obtenerCelular()));
-		this->finalizarLlamada(equipo,equipoReceptor,minuto);
+	Llamada* llamada = equipo->obtenerUltimaLlamada();
+
+	if (!llamada->estaFinalizada()){
+		this->finalizarAntenaUtilizada(equipo,minuto);
 	}
 	antena->decrementarCantidadEquiposConectados();
 	Conexion* ultimaConexion = equipo->obtenerUltimaConexion();
 	ultimaConexion->desconectar();
-
 }
 
 void ParsearLineas::guardarLlamada(std::string datos, std::string tipo){
@@ -158,11 +149,12 @@ void ParsearLineas::guardarLlamada(std::string datos, std::string tipo){
 	Equipo* equipoReceptor = this->equipos->obtener(this->buscarEquipo(numeroReceptor));
 
 	if ((tipo == "Inicio")&&(equipoReceptor->estaConectado())){
-
 		this->agregarLlamadaInicio(equipoEmisor, equipoReceptor, minutos);
 
 	}else if (tipo == "Fin"){
+		//finaliza las antenas utilizadas
 		this->finalizarLlamada(equipoEmisor, equipoReceptor, minutos);
+		//luego finaliza las llamadas
 		Llamada* llamadaEmisor = equipoEmisor->obtenerUltimaLlamada();
 		Llamada* llamadaReceptor = equipoReceptor->obtenerUltimaLlamada();
 		llamadaEmisor->finalizarLlamada();
@@ -171,20 +163,20 @@ void ParsearLineas::guardarLlamada(std::string datos, std::string tipo){
 	}else{ //el receptor no esta conectado a una antena
 		//la antena tiene una llamada anulada
 		Conexion* conexion = equipoEmisor->obtenerUltimaConexion();
-		Antena* antena = this->antenas->obtener(this->buscarAntena(conexion->obtenerNombreAntena()));
-		antena->incrementarLlamadasAnuladas();
+		conexion->obtenerAntena()->incrementarLlamadasAnuladas();
 	}
 }
 
 void ParsearLineas::agregarLlamadaInicio(Equipo* equipoEmisor, Equipo* equipoReceptor, unsigned int minuto){
 
-	Llamada* llamadaEmisor = new Llamada(equipoEmisor->obtenerNumero(),"Inicio");
-	Llamada* llamadaReceptor = new Llamada(equipoReceptor->obtenerNumero());
+	Llamada* llamadaEmisor = new Llamada(equipoReceptor,"Inicio");
+	Llamada* llamadaReceptor = new Llamada(equipoEmisor);
 
 	this->guardarAntenaUtilizada(equipoEmisor, minuto, llamadaEmisor);
 	this->guardarAntenaUtilizada(equipoReceptor, minuto, llamadaReceptor);
 
-	if (equipoReceptor->estaOcupado()&&(equipoReceptor->obtenerUltimaLlamada()->obtenerCelular()==equipoEmisor->obtenerNumero())){
+	//if (equipoReceptor->estaOcupado() && equipoReceptor->obtenerUltimaLlamada()->obtenerCelular()==equipoEmisor){
+	if (equipoReceptor->estaOcupado()){
 		//incrementa el contador de los equipos en llamdas
 		equipoEmisor->incrementarLlamadasSalientes();
 		equipoReceptor->incrementarLlamadasEntrantes();
@@ -206,7 +198,7 @@ void ParsearLineas::guardarAntenaUtilizada(Equipo* equipo, unsigned int minuto, 
 
 	Lista<AntenaUtilizada*>* antenasUtilizadas = llamada->obtenerAntenasUtilizadas();
 	Conexion* ultimaAntena = equipo->obtenerUltimaConexion();
-	AntenaUtilizada* antena = new AntenaUtilizada((ultimaAntena->obtenerNombreAntena()),minuto);
+	AntenaUtilizada* antena = new AntenaUtilizada(ultimaAntena->obtenerAntena(),minuto);
 	antenasUtilizadas->agregar(antena);
 
 }

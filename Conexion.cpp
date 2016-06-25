@@ -8,11 +8,12 @@
 #include "Conexion.h"
 
 Conexion::Conexion(){
+	this->antena=0;
 	conectado = false;
 }
 
-Conexion::Conexion(std::string nombreAntena ){
-	this->nombreAntena = nombreAntena;
+Conexion::Conexion(Antena* antena ){
+	this->antena = antena;
 	conectado = true;
 }
 
@@ -28,12 +29,12 @@ bool Conexion::estaConectado(){
 	return (this->conectado);
 }
 
-std::string Conexion::obtenerNombreAntena(){
-	return this->nombreAntena;
+Antena* Conexion::obtenerAntena(){
+	return this->antena;
 }
 
-void Conexion::cambiarNombreAntena(std::string nombre){
-	this->nombreAntena = nombre;
+void Conexion::cambiarAntena(Antena* antenaNueva){
+	this->antena = antenaNueva;
 	this->conectar();
 }
 

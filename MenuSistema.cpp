@@ -339,7 +339,7 @@ void MenuSistema::detalleDeEquipos(){
 		std::cout << "- ";
 		std::cout<<equipo->obtenerNumero();
 		std::cout<< " - ";
-		std::cout << equipo->obtenerUltimaConexion()->obtenerNombreAntena() << std::endl;
+		std::cout << equipo->obtenerUltimaConexion()->obtenerAntena()->obtenerNombre() << std::endl;
 	}
 	//esperar al ingreso de una tecla?
 }
@@ -386,7 +386,7 @@ unsigned int MenuSistema::detalleDeLlamadasEmitidas(){
 	while(llamadas->avanzarCursor()){
 		llamada = llamadas->obtenerCursor();
 		if (llamada->esLlamadaRealizada() && !llamada->esOcupado()){
-			std::cout << llamada->obtenerCelular() << std::endl;
+			std::cout << llamada->obtenerCelular()->obtenerNumero() << std::endl;
 			std::cout << "Antenas Utilizadas: " << std::endl;
 			this->mostrarAntenasUtilizadas(llamada);
 		}
@@ -412,7 +412,7 @@ void MenuSistema::mostrarAntenasUtilizadas(Llamada* llamada){
 	antenas->iniciarCursor();
 
 	while(antenas->avanzarCursor()){
-		std::cout<<antenas->obtenerCursor()->obtenerNombreAntena()<<std::endl;
+		std::cout<<antenas->obtenerCursor()->obtenerAntena()->obtenerNombre()<<std::endl;
 	}
 
 }

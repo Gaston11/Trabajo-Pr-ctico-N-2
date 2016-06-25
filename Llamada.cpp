@@ -8,10 +8,10 @@
 #include "Llamada.h"
 #include "Equipo.h"
 
-Llamada::Llamada(std::string equipo, std::string tipo){
+Llamada::Llamada(Equipo* miEquipo, std::string tipo){
 
 	this->antenasUtilizadas = new Lista<AntenaUtilizada*>;
-	this->celular = equipo;
+	this->equipoLlamada = miEquipo;
 
 	this->llamadaEntrante = false;
 	this->llamadaRealizada = true;
@@ -19,18 +19,18 @@ Llamada::Llamada(std::string equipo, std::string tipo){
 	this->ocupado = false;
 }
 
-Llamada::Llamada(std::string equipo){
+Llamada::Llamada(Equipo* miEquipo){
 	this->antenasUtilizadas = new Lista<AntenaUtilizada*>;
-	this->celular = equipo;
 
+	this->equipoLlamada= miEquipo;
 	this->llamadaEntrante = true;
 	this->llamadaRealizada = false;
 	this->llamadaFinalizada = false;
 	this->ocupado = false;
 }
 
-std::string Llamada::obtenerCelular(){
-	return (this->celular);
+Equipo* Llamada::obtenerCelular(){
+	return (this->equipoLlamada);
 }
 
 bool Llamada::esLlamadaEntrante(){

@@ -6,14 +6,14 @@
  */
 #include "AntenaUtilizada.h"
 
-AntenaUtilizada::AntenaUtilizada(std::string nombreAntena, unsigned int minuto){
-	this->nombreAntena = nombreAntena;
+AntenaUtilizada::AntenaUtilizada(Antena* antena, unsigned int minuto){
+	this->antena = antena;
 	minutoIniciado = minuto;
 	minutoFinalizado = 0;
 }
 
-std::string AntenaUtilizada::obtenerNombreAntena(){
-	return this->nombreAntena;
+Antena* AntenaUtilizada::obtenerAntena(){
+	return this->antena;
 }
 
 void AntenaUtilizada::finAntenaUtilizada(unsigned int minutoFinal){

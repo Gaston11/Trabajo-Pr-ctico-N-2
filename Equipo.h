@@ -15,6 +15,9 @@
 #include "Conexion.h"
 #include "Llamada.h"
 
+class Llamada;
+class Conexion;
+
 class Equipo{
 
 private:

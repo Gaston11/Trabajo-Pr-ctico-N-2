@@ -93,12 +93,12 @@ public:
 
 	/*
 	 * pre : recibe por parametro un numero, busca en la lista de equipos
-	 * cargados si el nombre de alguno es igual a la que pasa
+	 * cargados si el nuemero de equipo de alguno es igual a la que pasa
 	 * por parametro(considero que si 2 numeros son iguales es el mismo equipo)
 	 * post: si se encuentra en la lista devuelve la posicion del mismo que
 	 * va a ser mayor a cero, si no se encuentra devuelve cero
 	 */
-	unsigned int buscarEquipo(std::string nombre);
+	unsigned int buscarEquipo(std::string numero);
 
 	/*
 	 * pre : recibe nombre antena, un numero y posiciones de los mismos en las listas

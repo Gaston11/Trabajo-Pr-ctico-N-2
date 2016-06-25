@@ -9,8 +9,10 @@
 #define ANTENA_H_INCLUDED
 
 #include <string>
-
+#include "Lista.h"
 #include "Equipo.h"
+
+class Equipo;
 
 class Antena{
 
