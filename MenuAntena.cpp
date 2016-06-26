@@ -166,7 +166,7 @@ unsigned int MenuAntena::contarMinutosAntena(Llamada* llamadaActual, std::string
 	antenasActuales->iniciarCursor();
 	while(antenasActuales->avanzarCursor()){
 		antenaActual = antenasActuales->obtenerCursor();
-		if (antenaActual->obtenerNombreAntena() == nombreAntena)
+		if (antenaActual->obtenerAntena()->obtenerNombre() == nombreAntena)
 			minutos = minutos + antenaActual->duracionDeMinutosEnAntena();
 	}
 	return minutos;
@@ -211,7 +211,7 @@ bool MenuAntena::antenaUsadaEnLlamada(Lista<AntenaUtilizada*>* antenasUtilizadas
 	antenasUtilizadas->iniciarCursor();
 	while(antenasUtilizadas->avanzarCursor() && !antenaEncontrada){
 		antenaActual = antenasUtilizadas->obtenerCursor();
-		if (antenaActual->obtenerNombreAntena() == nombreAntena)
+		if (antenaActual->obtenerAntena()->obtenerNombre() == nombreAntena)
 			antenaEncontrada = true;
 	}
 	return antenaEncontrada;

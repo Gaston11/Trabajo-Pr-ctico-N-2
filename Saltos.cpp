@@ -76,7 +76,7 @@ void Saltos::procesarAntenas(Lista<AntenaUtilizada*>* antenasUtilizadas){
 
 	while(antenasUtilizadas->avanzarCursor()){
 		antena=antenasUtilizadas->obtenerCursor();
-		pos=this->obtenerPosicionAntena(antena->obtenerNombreAntena());
+		pos=this->obtenerPosicionAntena(antena->obtenerAntena()->obtenerNombre());
 
 		if(!verticeIni){
 			verticeIni=pos;
