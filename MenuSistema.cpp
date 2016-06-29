@@ -205,7 +205,10 @@ void MenuSistema::celularQueMasLlamo(){
 	std::cout<<"Equipo/s que mas llamo: "<<std::endl;
 	std::cout<<"Cantidad: ";
 	std::cout<< cantidad<<std::endl;
+
+	if (cantidad>0){
 	this->mostrarEquipos(equiposQueMasLlamaron);
+	}else{std::cout << "No existen Equipos que que mas llamaron"<< std::endl;}
 
 	delete equiposQueMasLlamaron;
 }
@@ -352,17 +355,18 @@ unsigned int MenuSistema::detalleDeLlamadasRecibidas(){
 
 	Equipo* equipo = this->equipos->obtener(posicion);
 
-	std::cout << "Detalle de llamadas realizadas: " << std::endl;
+	std::cout << "Detalle de llamadas recibidas por el numero: ";
 
 	Lista<Llamada*>* llamadas = equipo->obtenerLLamadasEquipo();
 	llamadas->iniciarCursor();
 	Llamada* llamada;
+	std::cout << equipo->obtenerNumero() << std::endl;
 	while(llamadas->avanzarCursor()){
 		llamada = llamadas->obtenerCursor();
 		if (llamada->esLlamadaEntrante() && !llamada->esOcupado()){
-				std::cout << llamada->obtenerCelular() << std::endl;
-				std::cout << "Antenas Utilizadas: " << std::endl;
-				this->mostrarAntenasUtilizadas(llamada);
+			std::cout << llamada->obtenerCelular()->obtenerNumero() << std::endl;
+			std::cout << "Antenas Utilizadas: " << std::endl;
+			this->mostrarAntenasUtilizadas(llamada);
 		}
 
 	}
@@ -378,11 +382,12 @@ unsigned int MenuSistema::detalleDeLlamadasEmitidas(){
 
 	Equipo* equipo = this->equipos->obtener(posicion);
 
-	std::cout << "Detalle de llamadas emitidas: " << std::endl;
+	std::cout << "Detalle de llamadas realizadas por el numero: ";
 
 	Lista<Llamada*>* llamadas = equipo->obtenerLLamadasEquipo();
 	llamadas->iniciarCursor();
 	Llamada* llamada;
+	std::cout << equipo->obtenerNumero() << std::endl;
 	while(llamadas->avanzarCursor()){
 		llamada = llamadas->obtenerCursor();
 		if (llamada->esLlamadaRealizada() && !llamada->esOcupado()){

@@ -6,9 +6,11 @@
  */
 
 #include <string>
+#include <iostream>
 #include <fstream>
 #include "Antena.h"
 #include "Equipo.h"
+#include "Llamada.h"
 
 class ParsearLineas {
 
@@ -142,7 +144,14 @@ public:
 	/*
 	 * post: finaliza la ultima antena utilizada de una comunicacion
 	 */
-	void finalizarAntenaUtilizada(Equipo* emisor, unsigned int minuto);
+	void finalizarAntenaUtilizada(Llamada* llamada, unsigned int minuto);
+
+	/*
+	 * pre: recibe 2 equipos que realizaron una llamada
+	 * post: busca en las llamadas de equipoEmisor la que realizo con el equipo
+	 * receptor
+	 */
+	Llamada* buscarLlamada(Equipo* equipoEmisor, Equipo* equipoReceptor);
 
 	/*
 	 *post: obtiene una cadena de numeros y los convierte en un entero

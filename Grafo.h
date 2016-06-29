@@ -108,6 +108,7 @@ Grafo<T>::~Grafo(){
 	while (this->aristas->avanzarCursor()){
 		delete(this->aristas->obtenerCursor());
 	}
+	delete this->aristas;
 }
 
 template <class T>

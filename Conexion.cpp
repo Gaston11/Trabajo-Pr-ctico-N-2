@@ -7,11 +7,6 @@
 
 #include "Conexion.h"
 
-Conexion::Conexion(){
-	this->antena=0;
-	conectado = false;
-}
-
 Conexion::Conexion(Antena* antena ){
 	this->antena = antena;
 	conectado = true;

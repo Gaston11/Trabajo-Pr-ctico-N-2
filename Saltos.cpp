@@ -11,7 +11,7 @@ Saltos::Saltos(Lista<Equipo*>* equipos, Lista<Antena*>* antenas){
 
 	this->equipos = equipos;
 	this->antenas = antenas;
-	this->rango = this->equipos->contarElementos();
+	this->rango = this->antenas->contarElementos();
 
 	for (unsigned int i=0; i<this->rango; i++){
 		for(unsigned int j=0; j<this->rango; j++){
@@ -60,7 +60,7 @@ void Saltos::procesarLlamadas(Lista<Llamada*>* llamadas){
 	Lista<AntenaUtilizada*>* antenasUtilizadas;
 	while(llamadas->avanzarCursor()){
 		llamada=llamadas->obtenerCursor();
-		if (llamada->esOcupado()){
+		if (!llamada->esOcupado()){
 			antenasUtilizadas = llamada->obtenerAntenasUtilizadas();
 			this->procesarAntenas(antenasUtilizadas);
 		}

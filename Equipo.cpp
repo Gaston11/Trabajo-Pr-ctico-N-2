@@ -7,10 +7,10 @@
 
 #include "Equipo.h"
 
-Equipo::Equipo(std::string numero){
+Equipo::Equipo(std::string numero, Antena* antena){
 	this->numero = numero;
 	this->llamadas = new Lista<Llamada*>;
-	this->ultimaConexionAntena = new Conexion();
+	this->ultimaConexionAntena = new Conexion(antena);
 
 	this->llamadasEntrantes = 0;
 	this->llamadasSalientes = 0;
@@ -48,7 +48,16 @@ bool Equipo::estaConectado(){
 }
 
 bool Equipo::estaOcupado(){
+	/*
 	return (!this->obtenerUltimaLlamada()->estaFinalizada());
+	*/
+	bool encontrado = false;
+	this->llamadas->iniciarCursor();
+	while(this->llamadas->avanzarCursor() && ! encontrado){
+		encontrado =!(this->llamadas->obtenerCursor()->estaFinalizada());
+	}
+	return encontrado;
+
 }
 
 void Equipo::incrementarLlamadasSalientes(){

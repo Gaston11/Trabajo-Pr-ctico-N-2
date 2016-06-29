@@ -21,11 +21,6 @@ private:
 public:
 
 	/*
-	 * post: crea una conexion vacia
-	 */
-	Conexion();
-
-	/*
 	 * pre : si no esta conectado a una antena
 	 * post: inicializa la conexion
 	 */

@@ -34,9 +34,9 @@ private:
 public:
 
 	/*
-	 * post: Inicializa al equipo con numero
+	 * post: Inicializa al equipo con numero y una conexion
 	 */
-	Equipo(std::string numero);
+	Equipo(std::string numero, Antena* antena);
 
 	/*
 	 * post: devuelve el numero del equipo celular
