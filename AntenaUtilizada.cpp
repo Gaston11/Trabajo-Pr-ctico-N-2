@@ -8,8 +8,8 @@
 
 AntenaUtilizada::AntenaUtilizada(Antena* antena, unsigned int minuto){
 	this->antena = antena;
-	minutoIniciado = minuto;
-	minutoFinalizado = 0;
+	this->minutoIniciado = minuto;
+	this->minutoFinalizado = 0;
 }
 
 Antena* AntenaUtilizada::obtenerAntena(){
@@ -17,7 +17,7 @@ Antena* AntenaUtilizada::obtenerAntena(){
 }
 
 void AntenaUtilizada::finAntenaUtilizada(unsigned int minutoFinal){
-	minutoFinalizado = minutoFinal;
+	this->minutoFinalizado = minutoFinal;
 }
 
 unsigned int AntenaUtilizada::duracionDeMinutosEnAntena(){

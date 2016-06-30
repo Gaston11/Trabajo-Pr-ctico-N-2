@@ -40,7 +40,7 @@ int main(){
 
 	Lista<Equipo*>* equipos = archivo.obtenerEquipos();
 	Lista<Antena*>* antenas = archivo.obtenerAntenas();
-	MenuAntena menuAntena(antenas); // AGREGADOO
+	MenuAntena menuAntena(antenas);
 	MenuSistema menuEquipos(equipos);
 
 	Saltos saltosAntenas(equipos,antenas);

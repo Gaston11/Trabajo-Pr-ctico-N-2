@@ -12,7 +12,7 @@ MenuAntena::MenuAntena(Lista<Antena*>* nuevaListaAntenas){
 }
 
 void MenuAntena::MenuPrincipal(){
-	char opcion;
+	char opcion='X';
 
 	while (opcion != 'j') {
 		std::cout << "Opciones de menu sobre antenas: " << std::endl;;

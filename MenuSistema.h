@@ -61,6 +61,12 @@ private:
 	void equipoQueMasHablo();
 
 	/*
+	 * pre: recibe un equipo
+	 * post: calcula los minutos que hablo al realizar una llamada
+	 */
+	unsigned int calculaMinutosHablo(Equipo* equipo);
+
+	/*
 	 * post: muestra el celular que mas hablo si hay mas de uno con la misma
 	 * cantidad los muestra
 	 */
@@ -118,10 +124,10 @@ private:
 	void detalleEquipo(Equipo* equipo);
 
 	/*
-	 * post: devuelve la cantidad de antenas que utilizo un equipo durante
-	 * todas las llamdas
+	 * pre: recibe un equipo emisor y un receptor
+	 * post: muestra el detalle del emisor respector el receptor
 	 */
-	unsigned int cantidadAntenasUtilizadas(Equipo* equipo);
+	void detalleEquipo(Equipo* equipoEmisor, Equipo* equipoReceptor);
 
 	/*
 	 * post: muestra por pantalla los nombres de las antenas utilizadas

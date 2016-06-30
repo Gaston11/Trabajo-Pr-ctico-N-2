@@ -12,8 +12,7 @@ template <class T> class Grafo{
 	//conjunto de aristas
 private:
 	Lista<T>* vertices;
-	Lista<Lista<T>*>* aristas;//(Lista de listas)(con ceros y unos para indicar si hay una arista)
-	//en la diagonal hay ceros
+	Lista<Lista<T>*>* aristas;
 
 public:
 	/*
@@ -78,11 +77,6 @@ public:
 	 */
 	Lista<T>* obtenerVertices();
 
-	/*
-	 *
-	 */
-	//recorrido
-
 private:
 
 	/*
@@ -91,7 +85,6 @@ private:
 	 */
 	unsigned int obtenerPosicionVertice(T vertice);
 
-	//crear la matriz de adyacencia
 };
 
 template <class T>
@@ -103,7 +96,7 @@ Grafo<T>::Grafo(){
 template <class T>
 Grafo<T>::~Grafo(){
 	delete(this->vertices);
-	//ver como eliminar aristas
+
 	this->aristas->iniciarCursor();
 	while (this->aristas->avanzarCursor()){
 		delete(this->aristas->obtenerCursor());

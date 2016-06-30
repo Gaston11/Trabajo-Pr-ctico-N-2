@@ -122,6 +122,7 @@ void ParsearLineas::conectarEquipo(Antena* antena, std::string numero, unsigned 
 
 		antena->incrementarCantidadEquiposConectados();
 	}
+
 	//si no hay capacidad en antena espera hasta conetar con otra
 
 }
@@ -149,29 +150,18 @@ void ParsearLineas::guardarLlamada(std::string datos, std::string tipo){
 	Equipo* equipoReceptor = this->equipos->obtener(this->buscarEquipo(numeroReceptor));
 
 	if ((tipo == "Inicio")&&(equipoReceptor->estaConectado())){
-		std::cout << "el equipo receptor esta conectado INicia llamda"<<std::endl;
-		std::cout << numeroEmisor<<std::endl;
-		std::cout << numeroReceptor<<std::endl;
 		this->agregarLlamadaInicio(equipoEmisor, equipoReceptor, minutos);
 
 	}else if (tipo == "Fin"){
 		//finaliza las antenas utilizadas
-		std::cout << "Finalizar LLamada de :";
-		std::cout << "Numero Emisor/receptor: ";
-		std::cout << numeroEmisor << std::endl;
-		std::cout << numeroReceptor << std::endl;
-		this->finalizarLlamada(equipoEmisor, equipoReceptor, minutos);
-		//luego finaliza las llamadas
+		if( equipoReceptor->estaConectado()){
+			this->finalizarLlamada(equipoEmisor, equipoReceptor, minutos);
+			//luego finaliza las llamadas
+		}
 
 
 	}else{ //el receptor no esta conectado a una antena
 		//la antena tiene una llamada anulada
-		std::cout<<"el recpetor no esta conectado a una antena"<<std::endl;
-		std::cout << "Incrementa llamdas anuladas de la antena del emisor"<< std::endl;
-
-		Lista<Llamada*>* llamadas = equipoEmisor->obtenerLLamadasEquipo();
-		Llamada* llamada = new Llamada(equipoReceptor, "Inicio");
-		llamadas->agregar(llamada);
 		Conexion* conexion = equipoEmisor->obtenerUltimaConexion();
 		conexion->obtenerAntena()->incrementarLlamadasAnuladas();
 	}
@@ -181,24 +171,16 @@ void ParsearLineas::agregarLlamadaInicio(Equipo* equipoEmisor, Equipo* equipoRec
 
 	Llamada* llamadaEmisor = new Llamada(equipoReceptor,"Inicio");
 	Llamada* llamadaReceptor = new Llamada(equipoEmisor);
-	std::cout <<"Se crearon llamadas, llamada del emisor a :";
-	std::cout << llamadaEmisor->obtenerCelular()->obtenerNumero()<<std::endl;
-	std::cout << llamadaReceptor->obtenerCelular()->obtenerNumero()<<std::endl;
 
 	this->guardarAntenaUtilizada(equipoEmisor, minuto, llamadaEmisor);
 	this->guardarAntenaUtilizada(equipoReceptor, minuto, llamadaReceptor);
 
-	//if (equipoReceptor->estaOcupado() && equipoReceptor->obtenerUltimaLlamada()->obtenerCelular()==equipoEmisor){
 	if (!equipoReceptor->estaOcupado()){
 		//incrementa el contador de los equipos en llamdas
-		std::cout << "el equipo receptor no esta ocupado"<<std::endl;
-		std::cout << "Incremento salientes y entrantes"<<std::endl;
 		equipoEmisor->incrementarLlamadasSalientes();
 		equipoReceptor->incrementarLlamadasEntrantes();
 
 	}else{
-		std::cout << "el equipo esta ocupado"<< std::endl;
-		std::cout << "Incrementa llamadas Ocupados"<<std::endl;
 		equipoEmisor->incrementarSalientesOcupado();
 		equipoReceptor->incrementarEntrantesOcupado();
 		llamadaEmisor->cambiarOcupado();//Indica que la llamada es saliente y dio ocupado
@@ -222,20 +204,16 @@ void ParsearLineas::guardarAntenaUtilizada(Equipo* equipo, unsigned int minuto, 
 
 void ParsearLineas::finalizarLlamada(Equipo* equipoEmisor, Equipo* equipoReceptor,unsigned int minuto){
 
-	std::cout << "Obtiene las ultimas llamadas"<< std::endl;//borrar
 	Llamada* llamadaEmisor = equipoEmisor->obtenerUltimaLlamada();
 	Llamada* llamadaReceptor = equipoReceptor->obtenerUltimaLlamada();
 
 	if (llamadaEmisor->obtenerCelular()!=llamadaReceptor->obtenerCelular()){
-		std::cout << "La ultima llamada no es la correcta..."<<std::endl; //borrar
-		std::cout << "Busca la llamada correspondiente.."; // borrar
 		llamadaEmisor=this->buscarLlamada(equipoEmisor,equipoReceptor);
 		llamadaReceptor=this->buscarLlamada(equipoReceptor,equipoEmisor);
 		this->finalizarAntenaUtilizada(llamadaEmisor,minuto);
 		this->finalizarAntenaUtilizada(llamadaReceptor,minuto);
 	}
 
-	std::cout<<"Finaliza las llamadas"<<std::endl; //borrar
 	llamadaEmisor->finalizarLlamada();
 	llamadaReceptor->finalizarLlamada();
 
@@ -243,23 +221,12 @@ void ParsearLineas::finalizarLlamada(Equipo* equipoEmisor, Equipo* equipoRecepto
 
 void ParsearLineas::finalizarAntenaUtilizada(Llamada* llamada, unsigned int minuto){
 
-
-	std::cout << "Obtiene la ultima llamada de equipo: ";//borrar
-
-	//Llamada* llamada = equipo->obtenerUltimaLlamada();
-
-	//ver si la llamada del emisor no condice con el receptor
-	//falla para finalizar
-
-	std::cout<<"Con el equipo :"; //borrar
-	std::cout << llamada->obtenerCelular()->obtenerNumero()<<std::endl;
 	//ir a la ultima antena utilizada y agregar minutos de finalizacion
 	Lista<AntenaUtilizada*>* antenasUtilizadas = llamada->obtenerAntenasUtilizadas();
 	AntenaUtilizada* ultimaAntenaLlamada = antenasUtilizadas->obtener(antenasUtilizadas->contarElementos());
 
 	//obtiene el ultimo elemento de la antena utilizada
 	ultimaAntenaLlamada->finAntenaUtilizada(minuto);
-	std::cout<<"finaliza la antena utilizada"<<std::endl;
 }
 
 Llamada* ParsearLineas::buscarLlamada(Equipo* emisor, Equipo* receptor){
@@ -333,7 +300,6 @@ ParsearLineas::~ParsearLineas(){
 	}
 	delete this->antenas;
 	delete this->equipos;
-	std::cout << "Destructor ParsearLineas"<<std::endl;
 
 }
 
